@@ -7,18 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 class Settings extends Model
 {
 
-    const CATEGORY_CUSTOM_CSS = "custom_css";
-    const CATEGORY_CUSTOM_JS = "custom_js";
-    const CATEGORY_SOCIAL = "social";
-    const CATEGORY_COMMENTS = "comments";
-    const CATEGORY_SEO = "seo";
-    const CATEGORY_GENERAL = "general";
-    const CATEGORY_OLD_NEWS = "old_news";
+    protected $table = 'settigs';
+    protected $fillable = ['title', 'mainurl', 'email','link','address',
+        'logo', 'logomedium', 'logothumb', 'description', 'user_id', 'workflow_id', 'created_at', 'updated_at',
+        'phone','twitter','facebook','linkedin','gplus','youtube','flickr','pinterest','lat','lng'
+    ];
 
-    const TYPE_STRING = 'string';
-    const TYPE_TEXT = 'text';
-    const TYPE_CHECK = 'check';
 
-    protected $table = 'settings';
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 
+    public function createdby()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function workflow()
+    {
+        return $this->belongsTo('App\Workflow', 'user_id');
+    }
 }
