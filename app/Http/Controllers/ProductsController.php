@@ -55,6 +55,11 @@ class ProductsController extends Controller
             'title' => 'required|max:255',
             'description' => 'required',
             'image' => 'required',
+            'hotelinfo' => 'required',
+            'roominfo' => 'required',
+            'location' => 'required',
+
+
         ]);
 
         if ($errors->fails()) {
@@ -62,7 +67,6 @@ class ProductsController extends Controller
                 ->withErrors($errors)
                 ->withInput();
         }
-
 
         $request['title'] = strip_tags($request['title']);
         $request['slug'] = str_slug($request['title']);
@@ -103,28 +107,13 @@ class ProductsController extends Controller
             $imagemedium = Image::make($findimage)->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            /*
-                        $watermark = Image::make(public_path() . '/assets/img/watermark.png')->resize(300, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        });;
-
-                        $watermarkthumb = Image::make(public_path() . '/assets/img/watermark.png')->resize(50, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        });
-
-                        $watermarkthumb->opacity(30);
-                        $watermark->opacity(30);
-
-                        $imagethumb->insert($watermarkthumb, 'center');
-                        $imagemedium->insert($watermark, 'center');
-
-                        */
             $imagethumb->save($pathThumb . $imageName);
             $imagemedium->save($pathMedium . $imageName);
 
             $image = $request->imagethumb = $imageName;
             $imagethumb = $request->image = $imageName;
             $imagemedium = $request->image = $imageName;
+
 
         }
 
@@ -188,7 +177,6 @@ class ProductsController extends Controller
                 ->withInput();
         }
 
-
         $request['title'] = strip_tags($request['title']);
 
         $slug = DB::table('product')->select('slug')->where('id', '=', $id)->get();
@@ -223,22 +211,6 @@ class ProductsController extends Controller
                 $constraint->aspectRatio();
             });
 
-            /*          $watermark = Image::make(public_path() . '/assets/img/watermark.png')->resize(300, null, function ($constraint) {
-                          $constraint->aspectRatio();
-                      });;
-
-                      $watermarkthumb = Image::make(public_path() . '/assets/img/watermark.png')->resize(50, null, function ($constraint) {
-                          $constraint->aspectRatio();
-                      });
-
-
-
-                      $watermarkthumb->opacity(30);
-                      $watermark->opacity(30);
-
-                      $imagethumb->insert($watermarkthumb, 'center');
-                      $imagemedium->insert($watermark, 'center');
-            */
             $imagethumb->save($pathThumb . $imageName);
             $imagemedium->save($pathMedium . $imageName);
 

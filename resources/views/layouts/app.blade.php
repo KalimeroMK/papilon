@@ -22,7 +22,7 @@
     <!--Beyond styles-->
     <link id="beyond-link" href="/assets/css/beyond.min.css" rel="stylesheet" type="text/css"/>
     <link href="/assets/css/demo.min.css" rel="stylesheet"/>
-    <link href="/assets/css/skins/orange.min.css" rel="stylesheet" />
+    <link href="/assets/css/skins/orange.min.css" rel="stylesheet"/>
     <link href="/assets/css/typicons.min.css" rel="stylesheet"/>
     <link href="/assets/css/animate.min.css" rel="stylesheet"/>
     <link href="/assets/css/custom.css" rel="stylesheet"/>
@@ -271,13 +271,14 @@
 
 
         <script type="text/javascript" src="/assets/js/ckeditor/ckeditor.js"></script>
-        <script type="text/javascript" src="/assets/js/ckconf.js"></script>
-        <!--Beyond Scripts-->
+    {{--<script type="text/javascript" src="/assets/js/ckconf.js"></script>--}}
+
+    <!--Beyond Scripts-->
         <script src="/assets/js/beyond.js"></script>
 
         <script src="/assets/js/bootbox/bootbox.js"></script>
 
-        @yield('scripts')
+    @yield('scripts')
     <!-- Custom Scripts -->
         <script src="/assets/js/custom.js"></script>
 

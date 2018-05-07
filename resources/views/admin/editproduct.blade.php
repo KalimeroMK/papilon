@@ -47,7 +47,8 @@
 
                             <div class="form-group">
                                 <label for="title">Title</label>
-                                <textarea class="ckeditor" id="title" name="title">{{ $product->title }}</textarea>
+                                <input type="text" class="form-control" placeholder="{{ $product->title }}"
+                                       name="title">
                             </div>
                             @if ($errors->has('title')) <p
                                     class="alert alert-danger">{{ $errors->first('title') }}</p> @endif
@@ -61,9 +62,45 @@
                             @if ($errors->has('description')) <p
                                     class="alert alert-danger">{{ $errors->first('description') }}</p> @endif
 
+                            <div class="form-group">
+                                <label for="hotelinfo">Hotelinfo</label>
+                                <input type="text" class="form-control" placeholder="{{ $product->hotelinfo }}"
+                                       name="hotelinfo">
+
+                            </div>
+                            @if ($errors->has('hotelinfo')) <p
+                                    class="alert alert-danger">{{ $errors->first('hotelinfo') }}</p> @endif
+                            <div class="form-group">
+                                <label for="roominfo">Room info</label>
+                                <input type="text" class="form-control" placeholder="{{ $product->roominfo }}"
+                                       name="roominfo">
+
+                            </div>
+                            @if ($errors->has('roominfo')) <p
+                                    class="alert alert-danger">{{ $errors->first('roominfo') }}</p> @endif
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" class="form-control" placeholder="{{ $product->location }}"
+                                       name="location">
+
+                            </div>
 
                             <div class="form-group">
-                                <label for="user">Translator</label>
+                                <label for="price">Price</label>
+                                <textarea class="ckeditor" id="price"
+                                          name="price">{{ $product->price }}</textarea>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input type="text" id="searchmap" class="form-control">
+                                <div id="map-canvas"></div>
+                            </div>
+
+                            @if ($errors->has('price')) <p
+                                    class="alert alert-danger">{{ $errors->first('price') }}</p> @endif
+
+                            <div class="form-group">
+                                <label for="user">Author</label>
                                 <select name="user_id" id="user" class="form-control">
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}"
@@ -110,4 +147,10 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <!-- Google Maps -->
+    <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyA75bnzyJ_5j2Ger9Erjo1Q-0XucnZbst4"></script>
+    <script type="text/javascript" src="/assets/js/maps.js"></script>
 @endsection

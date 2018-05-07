@@ -34,7 +34,11 @@ class HomePageController extends Controller
         $tree = Category::getTreeHP($categories);
         $allcategories = DB::table('product')->join('categories', 'product.category', '=', 'categories.id')->groupBy('categories.id')->take(8)->get();
         $data = ["blogs" => $blogs, "referrals" => $referrals, "settings" => $settings, "sliders" => $sliders, "services" => $services, "staticpages" => $staticpages, "allcategories" => $allcategories, "status" => "success", "products" => $products, "categories" => $categories, "tree" => $tree];
-        return view('main.homepage')->with($data);
+        return view('main.homepage')->with($data);@section('scripts')
+    <!-- Google Maps -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyA75bnzyJ_5j2Ger9Erjo1Q-0XucnZbst4"></script>
+  <script type="text/javascript" src="/assets/js/maps.js"></script>
+@endsection
     }
 
 

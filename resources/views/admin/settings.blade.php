@@ -34,7 +34,7 @@
 
                             <div class="form-group">
                                 <label for="title">Наслов на страната</label>
-                                <input type="text" name="title" class="form-control"></input>
+                                <input type="text" name="title" class="form-control"/>
                             </div>
                             @if ($errors->has('title')) <p
                                     class="alert alert-danger">{{ $errors->first('title') }}</p> @endif
@@ -189,6 +189,7 @@
 
 @section('scripts')
     <!-- Google Maps -->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyA75bnzyJ_5j2Ger9Erjo1Q-0XucnZbst4"></script>
-  <script type="text/javascript" src="/assets/js/maps.js"></script>
+    <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyA75bnzyJ_5j2Ger9Erjo1Q-0XucnZbst4"></script>
+    <script type="text/javascript" src="/assets/js/maps.js"></script>
 @endsection
