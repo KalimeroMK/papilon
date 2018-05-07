@@ -1,4 +1,5 @@
 (function ($) {
+    google
     $(document).ready(function () {
 
         // Google Maps
