@@ -37,10 +37,10 @@ class CKFinder_Connector_Utils_FileSystem
      */
     public static function combinePaths($path1, $path2)
     {
-        if (is_null($path1)) {
+        if (is_null($path1))  {
             $path1 = "";
         }
-        if (is_null($path2)) {
+        if (is_null($path2))  {
             $path2 = "";
         }
         if (!strlen($path2)) {
@@ -50,17 +50,19 @@ class CKFinder_Connector_Utils_FileSystem
                     $path1 .= '/';
                 }
             }
-        } else {
+        }
+        else {
             $_firstCharP2 = substr($path2, 0, 1);
             if (strlen($path1)) {
-                if (strpos($path2, $path1) === 0) {
+                if (strpos($path2, $path1)===0) {
                     return $path2;
                 }
                 $_lastCharP1 = substr($path1, -1, 1);
                 if ($_lastCharP1 != "/" && $_lastCharP1 != "\\" && $_firstCharP2 != "/" && $_firstCharP2 != "\\") {
                     $path1 .= '/';
                 }
-            } else {
+            }
+            else {
                 return $path2;
             }
         }
@@ -79,7 +81,7 @@ class CKFinder_Connector_Utils_FileSystem
     {
         $_config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
 
-        if (is_null($fileName) || !strlen($fileName) || substr($fileName, -1, 1) == "." || false !== strpos($fileName, "..")) {
+        if (is_null($fileName) || !strlen($fileName) || substr($fileName,-1,1)=="." || false!==strpos($fileName, "..")) {
             return false;
         }
 
@@ -124,14 +126,13 @@ class CKFinder_Connector_Utils_FileSystem
      * @access public
      * @param string $path
      */
-    public static function checkFolderPath($path)
-    {
-        $path = substr($path, strpos($path, '/') + 1);
-        $path = explode('/', trim($path, '/'));
-        foreach ($path as $dir) {
-            if (!empty($dir) && !CKFinder_Connector_Utils_FileSystem::checkFolderName($dir)) {
-                return false;
-            }
+    public static function checkFolderPath($path){
+      $path = substr($path,strpos($path,'/')+1);
+      $path = explode('/',trim($path,'/'));
+        foreach ( $path as $dir ){
+          if ( !empty($dir) && !CKFinder_Connector_Utils_FileSystem::checkFolderName($dir) ){
+            return false;
+          }
         }
 
         return true;
@@ -148,29 +149,30 @@ class CKFinder_Connector_Utils_FileSystem
     public static function unlink($path)
     {
         /*    make sure the path exists    */
-        if (!file_exists($path)) {
+        if(!file_exists($path)) {
             return false;
         }
 
         /*    If it is a file or link, just delete it    */
-        if (is_file($path) || is_link($path)) {
+        if(is_file($path) || is_link($path)) {
             return @unlink($path);
         }
 
         /*    Scan the dir and recursively unlink    */
         $files = scandir($path);
         if ($files) {
-            foreach ($files as $filename) {
+            foreach($files as $filename)
+            {
                 if ($filename == '.' || $filename == '..') {
                     continue;
                 }
-                $file = str_replace('//', '/', $path . '/' . $filename);
+                $file = str_replace('//','/',$path.'/'.$filename);
                 CKFinder_Connector_Utils_FileSystem::unlink($file);
             }
         }
 
         /*    Remove the parent dir    */
-        if (!@rmdir($path)) {
+        if(!@rmdir($path)) {
             return false;
         }
 
@@ -187,7 +189,7 @@ class CKFinder_Connector_Utils_FileSystem
      */
     public static function getFileNameWithoutExtension($fileName)
     {
-        $dotPos = strrpos($fileName, '.');
+        $dotPos = strrpos( $fileName, '.' );
         if (false === $dotPos) {
             return $fileName;
         }
@@ -203,24 +205,24 @@ class CKFinder_Connector_Utils_FileSystem
      * @param string $fileName
      * @return string
      */
-    public static function getExtension($fileName)
+    public static function getExtension( $fileName )
     {
-        $dotPos = strrpos($fileName, '.');
+        $dotPos = strrpos( $fileName, '.' );
         if (false === $dotPos) {
             return "";
         }
 
-        return substr($fileName, strrpos($fileName, '.') + 1);
+        return substr( $fileName, strrpos( $fileName, '.' ) +1 ) ;
     }
 
     /**
-     * Read file, split it into small chunks and send it to the browser
-     *
+	 * Read file, split it into small chunks and send it to the browser
+	 *
      * @static
      * @access public
-     * @param string $filename
-     * @return boolean
-     */
+	 * @param string $filename
+	 * @return boolean
+	 */
     public static function readfileChunked($filename)
     {
         $chunksize = 1024 * 10; // how many bytes per chunk
@@ -240,78 +242,78 @@ class CKFinder_Connector_Utils_FileSystem
     }
 
     /**
-     * Replace accented UTF-8 characters by unaccented ASCII-7 "equivalents".
-     * The purpose of this function is to replace characters commonly found in Latin
-     * alphabets with something more or less equivalent from the ASCII range. This can
-     * be useful for converting a UTF-8 to something ready for a filename, for example.
-     * Following the use of this function, you would probably also pass the string
-     * through utf8_strip_non_ascii to clean out any other non-ASCII chars
-     *
-     * For a more complete implementation of transliteration, see the utf8_to_ascii package
-     * available from the phputf8 project downloads:
-     * http://prdownloads.sourceforge.net/phputf8
-     *
-     * @param string UTF-8 string
-     * @param string UTF-8 with accented characters replaced by ASCII chars
-     * @return string accented chars replaced with ascii equivalents
-     * @author Andreas Gohr <andi@splitbrain.org>
-     * @see http://sourceforge.net/projects/phputf8/
-     */
+    * Replace accented UTF-8 characters by unaccented ASCII-7 "equivalents".
+    * The purpose of this function is to replace characters commonly found in Latin
+    * alphabets with something more or less equivalent from the ASCII range. This can
+    * be useful for converting a UTF-8 to something ready for a filename, for example.
+    * Following the use of this function, you would probably also pass the string
+    * through utf8_strip_non_ascii to clean out any other non-ASCII chars
+    *
+    * For a more complete implementation of transliteration, see the utf8_to_ascii package
+    * available from the phputf8 project downloads:
+    * http://prdownloads.sourceforge.net/phputf8
+    *
+    * @param string UTF-8 string
+    * @param string UTF-8 with accented characters replaced by ASCII chars
+    * @return string accented chars replaced with ascii equivalents
+    * @author Andreas Gohr <andi@splitbrain.org>
+    * @see http://sourceforge.net/projects/phputf8/
+    */
     public static function convertToAscii($str)
     {
         static $UTF8_LOWER_ACCENTS = NULL;
         static $UTF8_UPPER_ACCENTS = NULL;
 
-        if (is_null($UTF8_LOWER_ACCENTS)) {
+        if ( is_null($UTF8_LOWER_ACCENTS) ) {
             $UTF8_LOWER_ACCENTS = array(
-                'à' => 'a', 'ô' => 'o', 'ď' => 'd', 'ḟ' => 'f', 'ë' => 'e', 'š' => 's', 'ơ' => 'o',
-                'ß' => 'ss', 'ă' => 'a', 'ř' => 'r', 'ț' => 't', 'ň' => 'n', 'ā' => 'a', 'ķ' => 'k',
-                'ŝ' => 's', 'ỳ' => 'y', 'ņ' => 'n', 'ĺ' => 'l', 'ħ' => 'h', 'ṗ' => 'p', 'ó' => 'o',
-                'ú' => 'u', 'ě' => 'e', 'é' => 'e', 'ç' => 'c', 'ẁ' => 'w', 'ċ' => 'c', 'õ' => 'o',
-                'ṡ' => 's', 'ø' => 'o', 'ģ' => 'g', 'ŧ' => 't', 'ș' => 's', 'ė' => 'e', 'ĉ' => 'c',
-                'ś' => 's', 'î' => 'i', 'ű' => 'u', 'ć' => 'c', 'ę' => 'e', 'ŵ' => 'w', 'ṫ' => 't',
-                'ū' => 'u', 'č' => 'c', 'ö' => 'oe', 'è' => 'e', 'ŷ' => 'y', 'ą' => 'a', 'ł' => 'l',
-                'ų' => 'u', 'ů' => 'u', 'ş' => 's', 'ğ' => 'g', 'ļ' => 'l', 'ƒ' => 'f', 'ž' => 'z',
-                'ẃ' => 'w', 'ḃ' => 'b', 'å' => 'a', 'ì' => 'i', 'ï' => 'i', 'ḋ' => 'd', 'ť' => 't',
-                'ŗ' => 'r', 'ä' => 'ae', 'í' => 'i', 'ŕ' => 'r', 'ê' => 'e', 'ü' => 'ue', 'ò' => 'o',
-                'ē' => 'e', 'ñ' => 'n', 'ń' => 'n', 'ĥ' => 'h', 'ĝ' => 'g', 'đ' => 'd', 'ĵ' => 'j',
-                'ÿ' => 'y', 'ũ' => 'u', 'ŭ' => 'u', 'ư' => 'u', 'ţ' => 't', 'ý' => 'y', 'ő' => 'o',
-                'â' => 'a', 'ľ' => 'l', 'ẅ' => 'w', 'ż' => 'z', 'ī' => 'i', 'ã' => 'a', 'ġ' => 'g',
-                'ṁ' => 'm', 'ō' => 'o', 'ĩ' => 'i', 'ù' => 'u', 'į' => 'i', 'ź' => 'z', 'á' => 'a',
-                'û' => 'u', 'þ' => 'th', 'ð' => 'dh', 'æ' => 'ae', 'µ' => 'u', 'ĕ' => 'e',
+  'à' => 'a', 'ô' => 'o', 'ď' => 'd', 'ḟ' => 'f', 'ë' => 'e', 'š' => 's', 'ơ' => 'o',
+  'ß' => 'ss', 'ă' => 'a', 'ř' => 'r', 'ț' => 't', 'ň' => 'n', 'ā' => 'a', 'ķ' => 'k',
+  'ŝ' => 's', 'ỳ' => 'y', 'ņ' => 'n', 'ĺ' => 'l', 'ħ' => 'h', 'ṗ' => 'p', 'ó' => 'o',
+  'ú' => 'u', 'ě' => 'e', 'é' => 'e', 'ç' => 'c', 'ẁ' => 'w', 'ċ' => 'c', 'õ' => 'o',
+  'ṡ' => 's', 'ø' => 'o', 'ģ' => 'g', 'ŧ' => 't', 'ș' => 's', 'ė' => 'e', 'ĉ' => 'c',
+  'ś' => 's', 'î' => 'i', 'ű' => 'u', 'ć' => 'c', 'ę' => 'e', 'ŵ' => 'w', 'ṫ' => 't',
+  'ū' => 'u', 'č' => 'c', 'ö' => 'oe', 'è' => 'e', 'ŷ' => 'y', 'ą' => 'a', 'ł' => 'l',
+  'ų' => 'u', 'ů' => 'u', 'ş' => 's', 'ğ' => 'g', 'ļ' => 'l', 'ƒ' => 'f', 'ž' => 'z',
+  'ẃ' => 'w', 'ḃ' => 'b', 'å' => 'a', 'ì' => 'i', 'ï' => 'i', 'ḋ' => 'd', 'ť' => 't',
+  'ŗ' => 'r', 'ä' => 'ae', 'í' => 'i', 'ŕ' => 'r', 'ê' => 'e', 'ü' => 'ue', 'ò' => 'o',
+  'ē' => 'e', 'ñ' => 'n', 'ń' => 'n', 'ĥ' => 'h', 'ĝ' => 'g', 'đ' => 'd', 'ĵ' => 'j',
+  'ÿ' => 'y', 'ũ' => 'u', 'ŭ' => 'u', 'ư' => 'u', 'ţ' => 't', 'ý' => 'y', 'ő' => 'o',
+  'â' => 'a', 'ľ' => 'l', 'ẅ' => 'w', 'ż' => 'z', 'ī' => 'i', 'ã' => 'a', 'ġ' => 'g',
+  'ṁ' => 'm', 'ō' => 'o', 'ĩ' => 'i', 'ù' => 'u', 'į' => 'i', 'ź' => 'z', 'á' => 'a',
+  'û' => 'u', 'þ' => 'th', 'ð' => 'dh', 'æ' => 'ae', 'µ' => 'u', 'ĕ' => 'e',
             );
         }
 
         $str = str_replace(
-            array_keys($UTF8_LOWER_ACCENTS),
-            array_values($UTF8_LOWER_ACCENTS),
-            $str
-        );
+                array_keys($UTF8_LOWER_ACCENTS),
+                array_values($UTF8_LOWER_ACCENTS),
+                $str
+            );
 
-        if (is_null($UTF8_UPPER_ACCENTS)) {
+        if ( is_null($UTF8_UPPER_ACCENTS) ) {
             $UTF8_UPPER_ACCENTS = array(
-                'À' => 'A', 'Ô' => 'O', 'Ď' => 'D', 'Ḟ' => 'F', 'Ë' => 'E', 'Š' => 'S', 'Ơ' => 'O',
-                'Ă' => 'A', 'Ř' => 'R', 'Ț' => 'T', 'Ň' => 'N', 'Ā' => 'A', 'Ķ' => 'K',
-                'Ŝ' => 'S', 'Ỳ' => 'Y', 'Ņ' => 'N', 'Ĺ' => 'L', 'Ħ' => 'H', 'Ṗ' => 'P', 'Ó' => 'O',
-                'Ú' => 'U', 'Ě' => 'E', 'É' => 'E', 'Ç' => 'C', 'Ẁ' => 'W', 'Ċ' => 'C', 'Õ' => 'O',
-                'Ṡ' => 'S', 'Ø' => 'O', 'Ģ' => 'G', 'Ŧ' => 'T', 'Ș' => 'S', 'Ė' => 'E', 'Ĉ' => 'C',
-                'Ś' => 'S', 'Î' => 'I', 'Ű' => 'U', 'Ć' => 'C', 'Ę' => 'E', 'Ŵ' => 'W', 'Ṫ' => 'T',
-                'Ū' => 'U', 'Č' => 'C', 'Ö' => 'Oe', 'È' => 'E', 'Ŷ' => 'Y', 'Ą' => 'A', 'Ł' => 'L',
-                'Ų' => 'U', 'Ů' => 'U', 'Ş' => 'S', 'Ğ' => 'G', 'Ļ' => 'L', 'Ƒ' => 'F', 'Ž' => 'Z',
-                'Ẃ' => 'W', 'Ḃ' => 'B', 'Å' => 'A', 'Ì' => 'I', 'Ï' => 'I', 'Ḋ' => 'D', 'Ť' => 'T',
-                'Ŗ' => 'R', 'Ä' => 'Ae', 'Í' => 'I', 'Ŕ' => 'R', 'Ê' => 'E', 'Ü' => 'Ue', 'Ò' => 'O',
-                'Ē' => 'E', 'Ñ' => 'N', 'Ń' => 'N', 'Ĥ' => 'H', 'Ĝ' => 'G', 'Đ' => 'D', 'Ĵ' => 'J',
-                'Ÿ' => 'Y', 'Ũ' => 'U', 'Ŭ' => 'U', 'Ư' => 'U', 'Ţ' => 'T', 'Ý' => 'Y', 'Ő' => 'O',
-                'Â' => 'A', 'Ľ' => 'L', 'Ẅ' => 'W', 'Ż' => 'Z', 'Ī' => 'I', 'Ã' => 'A', 'Ġ' => 'G',
-                'Ṁ' => 'M', 'Ō' => 'O', 'Ĩ' => 'I', 'Ù' => 'U', 'Į' => 'I', 'Ź' => 'Z', 'Á' => 'A',
-                'Û' => 'U', 'Þ' => 'Th', 'Ð' => 'Dh', 'Æ' => 'Ae', 'Ĕ' => 'E',
+  'À' => 'A', 'Ô' => 'O', 'Ď' => 'D', 'Ḟ' => 'F', 'Ë' => 'E', 'Š' => 'S', 'Ơ' => 'O',
+  'Ă' => 'A', 'Ř' => 'R', 'Ț' => 'T', 'Ň' => 'N', 'Ā' => 'A', 'Ķ' => 'K',
+  'Ŝ' => 'S', 'Ỳ' => 'Y', 'Ņ' => 'N', 'Ĺ' => 'L', 'Ħ' => 'H', 'Ṗ' => 'P', 'Ó' => 'O',
+  'Ú' => 'U', 'Ě' => 'E', 'É' => 'E', 'Ç' => 'C', 'Ẁ' => 'W', 'Ċ' => 'C', 'Õ' => 'O',
+  'Ṡ' => 'S', 'Ø' => 'O', 'Ģ' => 'G', 'Ŧ' => 'T', 'Ș' => 'S', 'Ė' => 'E', 'Ĉ' => 'C',
+  'Ś' => 'S', 'Î' => 'I', 'Ű' => 'U', 'Ć' => 'C', 'Ę' => 'E', 'Ŵ' => 'W', 'Ṫ' => 'T',
+  'Ū' => 'U', 'Č' => 'C', 'Ö' => 'Oe', 'È' => 'E', 'Ŷ' => 'Y', 'Ą' => 'A', 'Ł' => 'L',
+  'Ų' => 'U', 'Ů' => 'U', 'Ş' => 'S', 'Ğ' => 'G', 'Ļ' => 'L', 'Ƒ' => 'F', 'Ž' => 'Z',
+  'Ẃ' => 'W', 'Ḃ' => 'B', 'Å' => 'A', 'Ì' => 'I', 'Ï' => 'I', 'Ḋ' => 'D', 'Ť' => 'T',
+  'Ŗ' => 'R', 'Ä' => 'Ae', 'Í' => 'I', 'Ŕ' => 'R', 'Ê' => 'E', 'Ü' => 'Ue', 'Ò' => 'O',
+  'Ē' => 'E', 'Ñ' => 'N', 'Ń' => 'N', 'Ĥ' => 'H', 'Ĝ' => 'G', 'Đ' => 'D', 'Ĵ' => 'J',
+  'Ÿ' => 'Y', 'Ũ' => 'U', 'Ŭ' => 'U', 'Ư' => 'U', 'Ţ' => 'T', 'Ý' => 'Y', 'Ő' => 'O',
+  'Â' => 'A', 'Ľ' => 'L', 'Ẅ' => 'W', 'Ż' => 'Z', 'Ī' => 'I', 'Ã' => 'A', 'Ġ' => 'G',
+  'Ṁ' => 'M', 'Ō' => 'O', 'Ĩ' => 'I', 'Ù' => 'U', 'Į' => 'I', 'Ź' => 'Z', 'Á' => 'A',
+  'Û' => 'U', 'Þ' => 'Th', 'Ð' => 'Dh', 'Æ' => 'Ae', 'Ĕ' => 'E',
             );
         }
         $str = str_replace(
-            array_keys($UTF8_UPPER_ACCENTS),
-            array_values($UTF8_UPPER_ACCENTS),
-            $str
-        );
+                array_keys($UTF8_UPPER_ACCENTS),
+                array_values($UTF8_UPPER_ACCENTS),
+                $str
+            );
         return $str;
     }
 
@@ -325,15 +327,17 @@ class CKFinder_Connector_Utils_FileSystem
      */
     public static function secureFileName($fileName)
     {
-        $_config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
-        $fileName = str_replace(array(":", "*", "?", "|", "/"), "_", $fileName);
-        if ($_config->getDisallowUnsafeCharacters()) {
-            $fileName = str_replace(";", "_", $fileName);
-        }
-        if ($_config->forceAscii()) {
-            $fileName = CKFinder_Connector_Utils_FileSystem::convertToAscii($fileName);
-        }
-        return $fileName;
+      $_config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
+      $fileName = str_replace(array(":", "*", "?", "|", "/"), "_", $fileName);
+      if ( $_config->getDisallowUnsafeCharacters() )
+      {
+        $fileName = str_replace(";", "_", $fileName);
+      }
+      if ($_config->forceAscii())
+      {
+        $fileName = CKFinder_Connector_Utils_FileSystem::convertToAscii($fileName);
+      }
+      return $fileName;
     }
 
     /**
@@ -361,18 +365,19 @@ class CKFinder_Connector_Utils_FileSystem
                  */
                 $encoded = @mb_convert_encoding($fileName, $encoding, 'UTF-8');
                 if (@mb_strlen($fileName, "UTF-8") != @mb_strlen($encoded, $encoding)) {
-                    return str_replace("\0", "_", preg_replace("/[^[:ascii:]]/u", "_", $fileName));
-                } else {
+                    return str_replace("\0", "_", preg_replace("/[^[:ascii:]]/u","_",$fileName));
+                }
+                else {
                     return str_replace("\0", "_", $encoded);
                 }
             } else {
-                return str_replace("\0", "_", preg_replace("/[^[:ascii:]]/u", "_", $fileName));
+                return str_replace("\0", "_", preg_replace("/[^[:ascii:]]/u","_",$fileName));
             }
         }
 
         $converted = @iconv("UTF-8", $encoding . "//IGNORE//TRANSLIT", $fileName);
         if ($converted === false) {
-            return str_replace("\0", "_", preg_replace("/[^[:ascii:]]/u", "_", $fileName));
+            return str_replace("\0", "_", preg_replace("/[^[:ascii:]]/u","_",$fileName));
         }
 
         return $converted;
@@ -426,11 +431,12 @@ class CKFinder_Connector_Utils_FileSystem
          */
         if (isset($_SERVER['SCRIPT_FILENAME'])) {
             $sRealPath = dirname($_SERVER['SCRIPT_FILENAME']);
-        } else {
+        }
+        else {
             /**
              * realpath — Returns canonicalized absolute pathname
              */
-            $sRealPath = realpath('./');
+            $sRealPath = realpath( './' ) ;
         }
 
         /**
@@ -455,7 +461,8 @@ class CKFinder_Connector_Utils_FileSystem
     {
         if (DIRECTORY_SEPARATOR === "\\") {
             $dir = str_replace("/", "\\", $dir);
-        } else if (DIRECTORY_SEPARATOR === "/") {
+        }
+        else if (DIRECTORY_SEPARATOR === "/") {
             $dir = str_replace("\\", "/", $dir);
         }
 
@@ -464,7 +471,8 @@ class CKFinder_Connector_Utils_FileSystem
             $oldUmask = umask(0);
             $bCreated = @mkdir($dir, $perms, true);
             umask($oldUmask);
-        } else {
+        }
+        else {
             $bCreated = @mkdir($dir, 0777, true);
         }
 
@@ -480,15 +488,15 @@ class CKFinder_Connector_Utils_FileSystem
      * @access public
      * @param string $filePath absolute path to file
      * @return boolean
-     */
+    */
     public static function detectHtml($filePath)
     {
         $fp = @fopen($filePath, 'rb');
-        if ($fp === false || !flock($fp, LOCK_SH)) {
-            return -1;
+        if ( $fp === false || !flock( $fp, LOCK_SH ) ) {
+            return -1 ;
         }
         $chunk = fread($fp, 1024);
-        flock($fp, LOCK_UN);
+        flock( $fp, LOCK_UN ) ;
         fclose($fp);
 
         $chunk = strtolower($chunk);
@@ -505,30 +513,30 @@ class CKFinder_Connector_Utils_FileSystem
 
         $tags = array('<body', '<head', '<html', '<img', '<pre', '<script', '<table', '<title');
 
-        foreach ($tags as $tag) {
-            if (false !== strpos($chunk, $tag)) {
-                return true;
+        foreach( $tags as $tag ) {
+            if(false !== strpos($chunk, $tag)) {
+                return true ;
             }
         }
 
         //type = javascript
         if (preg_match('!type\s*=\s*[\'"]?\s*(?:\w*/)?(?:ecma|java)!sim', $chunk)) {
-            return true;
+            return true ;
         }
 
         //href = javascript
         //src = javascript
         //data = javascript
-        if (preg_match('!(?:href|src|data)\s*=\s*[\'"]?\s*(?:ecma|java)script:!sim', $chunk)) {
-            return true;
+        if (preg_match('!(?:href|src|data)\s*=\s*[\'"]?\s*(?:ecma|java)script:!sim',$chunk)) {
+            return true ;
         }
 
         //url(javascript
         if (preg_match('!url\s*\(\s*[\'"]?\s*(?:ecma|java)script:!sim', $chunk)) {
-            return true;
+            return true ;
         }
 
-        return false;
+        return false ;
     }
 
     /**
@@ -542,7 +550,7 @@ class CKFinder_Connector_Utils_FileSystem
      * @param string $extension file extension
      * @param integer $detectionLevel 0 = none, 1 = use getimagesize for images, 2 = use DetectHtml for images
      * @return boolean
-     */
+    */
     public static function isImageValid($filePath, $extension)
     {
         if (!@is_readable($filePath)) {
@@ -552,16 +560,16 @@ class CKFinder_Connector_Utils_FileSystem
         $imageCheckExtensions = array('gif', 'jpeg', 'jpg', 'png', 'psd', 'bmp', 'tiff');
 
         // version_compare is available since PHP4 >= 4.0.7
-        if (function_exists('version_compare')) {
+        if ( function_exists( 'version_compare' ) ) {
             $sCurrentVersion = phpversion();
-            if (version_compare($sCurrentVersion, "4.2.0") >= 0) {
+            if ( version_compare( $sCurrentVersion, "4.2.0" ) >= 0 ) {
                 $imageCheckExtensions[] = "tiff";
                 $imageCheckExtensions[] = "tif";
             }
-            if (version_compare($sCurrentVersion, "4.3.0") >= 0) {
+            if ( version_compare( $sCurrentVersion, "4.3.0" ) >= 0 ) {
                 $imageCheckExtensions[] = "swc";
             }
-            if (version_compare($sCurrentVersion, "4.3.2") >= 0) {
+            if ( version_compare( $sCurrentVersion, "4.3.2" ) >= 0 ) {
                 $imageCheckExtensions[] = "jpc";
                 $imageCheckExtensions[] = "jp2";
                 $imageCheckExtensions[] = "jpx";
@@ -571,12 +579,12 @@ class CKFinder_Connector_Utils_FileSystem
             }
         }
 
-        if (!in_array($extension, $imageCheckExtensions)) {
+        if ( !in_array( $extension, $imageCheckExtensions ) ) {
             return true;
         }
 
-        if (@getimagesize($filePath) === false) {
-            return false;
+        if ( @getimagesize( $filePath ) === false ) {
+            return false ;
         }
 
         return true;
@@ -608,11 +616,11 @@ class CKFinder_Connector_Utils_FileSystem
                 $_config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
                 $_acl = $_config->getAccessControlConfig();
                 $_aclMask = $_acl->getComputedMask($_resourceType->getName(), $clientPath . $filename);
-                if (($_aclMask & CKFINDER_CONNECTOR_ACL_FOLDER_VIEW) != CKFINDER_CONNECTOR_ACL_FOLDER_VIEW) {
+                if ( ($_aclMask & CKFINDER_CONNECTOR_ACL_FOLDER_VIEW) != CKFINDER_CONNECTOR_ACL_FOLDER_VIEW ) {
                     continue;
                 }
                 if ($_resourceType->checkIsHiddenFolder($filename)) {
-                    continue;
+                  continue;
                 }
 
                 $hasChildren = true;
@@ -634,32 +642,32 @@ class CKFinder_Connector_Utils_FileSystem
      */
     public static function getTmpDir()
     {
-        $_config = &CKFinder_Connector_Core_Factory::getInstance("Core_Config");
-        $tmpDir = $_config->getTempDirectory();
-        if ($tmpDir) {
-            return $tmpDir;
+      $_config = & CKFinder_Connector_Core_Factory::getInstance("Core_Config");
+      $tmpDir = $_config->getTempDirectory();
+      if ( $tmpDir )
+      {
+        return $tmpDir;
+      }
+      if ( !function_exists('sys_get_temp_dir')) {
+        function sys_get_temp_dir() {
+          if( $temp=getenv('TMP') ){
+            return $temp;
+          }
+          if( $temp=getenv('TEMP') ) {
+            return $temp;
+          }
+          if( $temp=getenv('TMPDIR') ) {
+            return $temp;
+          }
+          $temp = tempnam(__FILE__,'');
+          if ( file_exists($temp) ){
+            unlink($temp);
+            return dirname($temp);
+          }
+          return null;
         }
-        if (!function_exists('sys_get_temp_dir')) {
-            function sys_get_temp_dir()
-            {
-                if ($temp = getenv('TMP')) {
-                    return $temp;
-                }
-                if ($temp = getenv('TEMP')) {
-                    return $temp;
-                }
-                if ($temp = getenv('TMPDIR')) {
-                    return $temp;
-                }
-                $temp = tempnam(__FILE__, '');
-                if (file_exists($temp)) {
-                    unlink($temp);
-                    return dirname($temp);
-                }
-                return null;
-            }
-        }
-        return sys_get_temp_dir();
+      }
+      return sys_get_temp_dir();
     }
 
     /**
@@ -672,11 +680,12 @@ class CKFinder_Connector_Utils_FileSystem
      */
     public static function isEmptyDir($dirname)
     {
-        $files = scandir($dirname);
-        if ($files && count($files) > 2) {
-            return false;
-        }
-        return true;
+      $files = scandir($dirname);
+      if ( $files && count($files) > 2)
+      {
+        return false;
+      }
+      return true;
     }
 
     /**
@@ -686,19 +695,22 @@ class CKFinder_Connector_Utils_FileSystem
      * @param string $fileName
      * @param string $sFileNameOrginal
      */
-    public static function autoRename($filePath, $fileName, $sFileNameOrginal)
+    public static function autoRename( $filePath, $fileName, $sFileNameOrginal )
     {
-        $iCounter = 0;
-        while (true) {
-            $sFilePath = CKFinder_Connector_Utils_FileSystem::combinePaths($filePath, $fileName);
-            if (file_exists($sFilePath)) {
-                $iCounter++;
-                $fileName = CKFinder_Connector_Utils_FileSystem::getFileNameWithoutExtension($sFileNameOrginal) . "(" . $iCounter . ")" . "." . CKFinder_Connector_Utils_FileSystem::getExtension($sFileNameOrginal);
-            } else {
-                break;
-            }
+      $iCounter = 0;
+      while (true)
+      {
+        $sFilePath = CKFinder_Connector_Utils_FileSystem::combinePaths($filePath, $fileName);
+        if ( file_exists($sFilePath) ){
+          $iCounter++;
+          $fileName = CKFinder_Connector_Utils_FileSystem::getFileNameWithoutExtension($sFileNameOrginal) . "(" . $iCounter . ")" . "." .CKFinder_Connector_Utils_FileSystem::getExtension($sFileNameOrginal);
         }
-        return $fileName;
+        else
+        {
+          break;
+        }
+      }
+      return $fileName;
     }
 
     /**
@@ -706,14 +718,13 @@ class CKFinder_Connector_Utils_FileSystem
      * Selects the method depending on the XSendfile setting
      * @param string $filePath
      */
-    public static function sendFile($filePath)
-    {
-        $config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
-        if ($config->getXSendfile()) {
-            CKFinder_Connector_Utils_FileSystem::sendWithXSendfile($filePath);
-        } else {
-            CKFinder_Connector_Utils_FileSystem::readfileChunked($filePath);
-        }
+    public static function sendFile( $filePath ){
+      $config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
+      if ( $config->getXSendfile() ){
+        CKFinder_Connector_Utils_FileSystem::sendWithXSendfile($filePath);
+      } else {
+        CKFinder_Connector_Utils_FileSystem::readfileChunked($filePath);
+      }
     }
 
     /**
@@ -721,28 +732,27 @@ class CKFinder_Connector_Utils_FileSystem
      *
      * @param string $filePath
      */
-    public static function sendWithXSendfile($filePath)
-    {
-        if (stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== FALSE) {
-            $fallback = true;
-            $config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
-            $XSendfileNginx = $config->getXSendfileNginx();
-            foreach ($XSendfileNginx as $location => $root) {
-                if (false !== stripos($filePath, $root)) {
-                    $fallback = false;
-                    $filePath = str_ireplace($root, $location, $filePath);
-                    header("X-Accel-Redirect: " . $filePath); // Nginx
-                    break;
-                }
-            }
-            // fallback to standar method
-            if ($fallback) {
-                CKFinder_Connector_Utils_FileSystem::readfileChunked($filePath);
-            }
-        } elseif (stripos($_SERVER['SERVER_SOFTWARE'], 'lighttpd/1.4') !== FALSE) {
-            header("X-LIGHTTPD-send-file: " . $filePath); // Lighttpd v1.4
-        } else {
-            header("X-Sendfile: " . $filePath); // Apache, Lighttpd v1.5, Cherokee
+    public static function sendWithXSendfile ( $filePath ){
+      if ( stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== FALSE ){
+        $fallback = true;
+        $config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
+        $XSendfileNginx = $config->getXSendfileNginx();
+        foreach ( $XSendfileNginx as $location => $root){
+          if ( false !== stripos($filePath , $root) ){
+            $fallback = false;
+            $filePath = str_ireplace($root,$location,$filePath);
+            header("X-Accel-Redirect: ".$filePath); // Nginx
+            break;
+          }
         }
+        // fallback to standar method
+        if ( $fallback ){
+          CKFinder_Connector_Utils_FileSystem::readfileChunked($filePath);
+        }
+      } elseif ( stripos($_SERVER['SERVER_SOFTWARE'], 'lighttpd/1.4') !== FALSE ){
+        header("X-LIGHTTPD-send-file: ".$filePath); // Lighttpd v1.4
+      } else {
+        header("X-Sendfile: ".$filePath); // Apache, Lighttpd v1.5, Cherokee
+      }
     }
 }

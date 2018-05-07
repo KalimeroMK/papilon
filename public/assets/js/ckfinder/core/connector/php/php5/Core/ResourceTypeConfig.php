@@ -96,7 +96,8 @@ class CKFinder_Connector_Core_ResourceTypeConfig
 
         if (!strlen($this->_url)) {
             $this->_url = "/";
-        } else if (substr($this->_url, -1, 1) != "/") {
+        }
+        else if(substr($this->_url,-1,1) != "/") {
             $this->_url .= "/";
         }
 
@@ -117,7 +118,8 @@ class CKFinder_Connector_Core_ResourceTypeConfig
                 foreach ($resourceTypeNode["allowedExtensions"] as $e) {
                     $this->_allowedExtensions[] = strtolower(trim((string)$e));
                 }
-            } else {
+            }
+            else {
                 $resourceTypeNode["allowedExtensions"] = trim((string)$resourceTypeNode["allowedExtensions"]);
                 if (strlen($resourceTypeNode["allowedExtensions"])) {
                     $extensions = explode(",", $resourceTypeNode["allowedExtensions"]);
@@ -134,7 +136,8 @@ class CKFinder_Connector_Core_ResourceTypeConfig
                 foreach ($resourceTypeNode["deniedExtensions"] as $extension) {
                     $this->_deniedExtensions[] = strtolower(trim((string)$e));
                 }
-            } else {
+            }
+            else {
                 $resourceTypeNode["deniedExtensions"] = trim((string)$resourceTypeNode["deniedExtensions"]);
                 if (strlen($resourceTypeNode["deniedExtensions"])) {
                     $extensions = explode(",", $resourceTypeNode["deniedExtensions"]);
@@ -238,25 +241,26 @@ class CKFinder_Connector_Core_ResourceTypeConfig
             $pieces = explode('.', $fileName);
 
             // First, check the last extension (ex. in file.php.jpg, the "jpg").
-            if (!$this->checkSingleExtension($pieces[sizeof($pieces) - 1])) {
+            if ( !$this->checkSingleExtension( $pieces[sizeof($pieces)-1] ) ) {
                 return false;
             }
 
             if ($renameIfRequired) {
                 // Check the other extensions, rebuilding the file name. If an extension is
                 // not allowed, replace the dot with an underscore.
-                $fileName = $pieces[0];
-                for ($i = 1; $i < sizeof($pieces) - 1; $i++) {
-                    $fileName .= $this->checkSingleExtension($pieces[$i]) ? '.' : '_';
+                $fileName = $pieces[0] ;
+                for ($i=1; $i<sizeof($pieces)-1; $i++) {
+                    $fileName .= $this->checkSingleExtension( $pieces[$i] ) ? '.' : '_' ;
                     $fileName .= $pieces[$i];
                 }
 
                 // Add the last extension to the final name.
-                $fileName .= '.' . $pieces[sizeof($pieces) - 1];
+                $fileName .= '.' . $pieces[sizeof($pieces)-1] ;
             }
-        } else {
+        }
+        else {
             // Check only the last extension (ex. in file.php.jpg, only "jpg").
-            return $this->checkSingleExtension(substr($fileName, strrpos($fileName, '.') + 1));
+            return $this->checkSingleExtension( substr($fileName, strrpos($fileName,'.')+1) );
         }
 
         return true;
@@ -338,7 +342,7 @@ class CKFinder_Connector_Core_ResourceTypeConfig
      */
     public function checkSingleExtension($extension)
     {
-        $extension = strtolower(ltrim($extension, '.'));
+        $extension = strtolower(ltrim($extension,'.'));
 
         if (sizeof($this->_deniedExtensions)) {
             if (in_array($extension, $this->_deniedExtensions)) {
@@ -359,8 +363,7 @@ class CKFinder_Connector_Core_ResourceTypeConfig
      * @access public
      * @return string 16 digit hash
      */
-    public function getHash()
-    {
-        return substr(md5($this->getDirectory()), 0, 16);
+    public function getHash(){
+      return substr(md5($this->getDirectory()), 0, 16);
     }
 }

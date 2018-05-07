@@ -5,7 +5,7 @@
  * Copyright (c) 2012 ExactTarget
  * Licensed under the MIT license.
  */
-!function (t) {
+! function (t) {
     var e = function (e, i) {
         this.$element = t(e), this.options = t.extend({}, t.fn.tree.defaults, i), this.$element.on("click", ".tree-item", t.proxy(function (t) {
             this.selectItem(t.currentTarget)
@@ -26,24 +26,24 @@
                 r.hide(), t.each(o.data, function (r, o) {
                     var s;
                     "folder" === o.type ? (s = i.$element.find(".tree-folder:eq(0)").clone().show(),
-                            s.find(".tree-folder-name").html(o.name),
-                            s.find(".tree-loader").html(i.options.loadingHTML),
-                            s.find(".tree-folder-header").data(o),
-                            /*Addedd For Custom Icon Class*/
-                            s.find('[class*="fa-"]').addClass(o["icon-class"])) :
-                        /*Addedd For Custom Icon Class*/
-                        "item" === o.type && (s = i.$element.find(".tree-item:eq(0)").clone().show(),
-                            s.find(".tree-item-name").html(o.name), s.data(o));
+                    s.find(".tree-folder-name").html(o.name),
+                    s.find(".tree-loader").html(i.options.loadingHTML),
+                    s.find(".tree-folder-header").data(o),
+                    /*Addedd For Custom Icon Class*/
+                    s.find('[class*="fa-"]').addClass(o["icon-class"])) :
+                    /*Addedd For Custom Icon Class*/
+                    "item" === o.type && (s = i.$element.find(".tree-item:eq(0)").clone().show(),
+                    s.find(".tree-item-name").html(o.name), s.data(o));
                     var a = o.dataAttributes || [];
                     t.each(a, function (t, e) {
                         switch (t) {
-                            case "class":
-                            case "classes":
-                            case "className":
-                                s.addClass(e);
-                                break;
-                            default:
-                                s.attr(t, e)
+                        case "class":
+                        case "classes":
+                        case "className":
+                            s.addClass(e);
+                            break;
+                        default:
+                            s.attr(t, e)
                         }
                     }), e.hasClass("tree-folder-header") ? n.find(".tree-folder-content:eq(0)").append(s) : e.append(s)
                 }), i.$element.trigger("loaded", n)
@@ -93,11 +93,11 @@
         }
     }, t.fn.tree = function (i, n) {
         var r, o = this.each(function () {
-            var o = t(this),
-                s = o.data("tree"),
-                a = "object" == typeof i && i;
-            s || o.data("tree", s = new e(this, a)), "string" == typeof i && (r = s[i](n))
-        });
+                var o = t(this),
+                    s = o.data("tree"),
+                    a = "object" == typeof i && i;
+                s || o.data("tree", s = new e(this, a)), "string" == typeof i && (r = s[i](n))
+            });
         return void 0 === r ? o : r
     }, t.fn.tree.defaults = {
         selectable: !0,

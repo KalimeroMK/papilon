@@ -114,7 +114,7 @@ class CKFinder_Connector_CommandHandler_ImageResize extends CKFinder_Connector_C
             $maxWidth = $_imagesConfig->getMaxWidth();
             $maxHeight = $_imagesConfig->getMaxHeight();
             // Shouldn't happen as the JavaScript validation should not allow this.
-            if (($maxWidth > 0 && $newWidth > $maxWidth) || ($maxHeight > 0 && $newHeight > $maxHeight)) {
+            if ( ( $maxWidth > 0 && $newWidth > $maxWidth ) || ( $maxHeight > 0 && $newHeight > $maxHeight ) ) {
                 $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_REQUEST);
             }
         }
@@ -122,7 +122,7 @@ class CKFinder_Connector_CommandHandler_ImageResize extends CKFinder_Connector_C
         require_once CKFINDER_CONNECTOR_LIB_DIR . "/CommandHandler/Thumbnail.php";
 
         if ($resizeOriginal) {
-            $result = CKFinder_Connector_CommandHandler_Thumbnail::createThumb($filePath, $newFilePath, $newWidth, $newHeight, $quality, false);
+            $result = CKFinder_Connector_CommandHandler_Thumbnail::createThumb($filePath, $newFilePath, $newWidth, $newHeight, $quality, false) ;
             if (!$result) {
                 $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_ACCESS_DENIED);
             }
@@ -133,11 +133,11 @@ class CKFinder_Connector_CommandHandler_ImageResize extends CKFinder_Connector_C
         $extension = CKFinder_Connector_Utils_FileSystem::getExtension($fileName);
         foreach (array('small', 'medium', 'large') as $size) {
             if (!empty($_POST[$size]) && $_POST[$size] == '1') {
-                $thumbName = $nameWithoutExt . "_" . $size . "." . $extension;
+                $thumbName = $nameWithoutExt."_".$size.".".$extension;
                 $newFilePath = CKFinder_Connector_Utils_FileSystem::combinePaths($this->_currentFolder->getServerPath(), $thumbName);
-                if (!empty($config[$size . 'Thumb'])) {
-                    if (preg_match("/^(\d+)x(\d+)$/", $config[$size . 'Thumb'], $matches)) {
-                        CKFinder_Connector_CommandHandler_Thumbnail::createThumb($filePath, $newFilePath, $matches[1], $matches[2], $quality, true);
+                if (!empty($config[$size.'Thumb'])) {
+                    if (preg_match("/^(\d+)x(\d+)$/", $config[$size.'Thumb'], $matches)) {
+                        CKFinder_Connector_CommandHandler_Thumbnail::createThumb($filePath, $newFilePath, $matches[1], $matches[2], $quality, true) ;
                     }
                 }
             }
@@ -148,7 +148,7 @@ class CKFinder_Connector_CommandHandler_ImageResize extends CKFinder_Connector_C
     /**
      * @access public
      */
-    function onInitCommand(&$connectorNode)
+    function onInitCommand( &$connectorNode )
     {
         // "@" protects against E_STRICT (Only variables should be assigned by reference)
         @$pluginsInfo = &$connectorNode->getChild("PluginsInfo");
@@ -156,24 +156,25 @@ class CKFinder_Connector_CommandHandler_ImageResize extends CKFinder_Connector_C
         $pluginsInfo->addChild($imageresize);
         $config = $this->getConfig();
         foreach (array('small', 'medium', 'large') as $size) {
-            if (!empty($config[$size . 'Thumb'])) {
-                $imageresize->addAttribute($size . 'Thumb', $config[$size . 'Thumb']);
+            if (!empty($config[$size.'Thumb'])) {
+                $imageresize->addAttribute($size.'Thumb', $config[$size.'Thumb']);
             }
         }
-        return true;
+        return true ;
     }
 
     /**
      * @access public
      */
-    function onBeforeExecuteCommand(&$command)
+    function onBeforeExecuteCommand( &$command )
     {
-        if ($command == 'ImageResize') {
+        if ( $command == 'ImageResize' )
+        {
             $this->sendResponse();
             return false;
         }
 
-        return true;
+        return true ;
     }
 }
 
@@ -225,22 +226,23 @@ class CKFinder_Connector_CommandHandler_ImageResizeInfo extends CKFinder_Connect
     /**
      * @access public
      */
-    function onBeforeExecuteCommand(&$command)
+    function onBeforeExecuteCommand( &$command )
     {
-        if ($command == 'ImageResizeInfo') {
+        if ( $command == 'ImageResizeInfo' )
+        {
             $this->sendResponse();
             return false;
         }
 
-        return true;
+        return true ;
     }
 }
 
 if (function_exists('imagecreate')) {
-    $CommandHandler_ImageResize = new CKFinder_Connector_CommandHandler_ImageResize();
-    $CommandHandler_ImageResizeInfo = new CKFinder_Connector_CommandHandler_ImageResizeInfo();
-    $config['Hooks']['BeforeExecuteCommand'][] = array($CommandHandler_ImageResize, "onBeforeExecuteCommand");
-    $config['Hooks']['BeforeExecuteCommand'][] = array($CommandHandler_ImageResizeInfo, "onBeforeExecuteCommand");
-    $config['Hooks']['InitCommand'][] = array($CommandHandler_ImageResize, "onInitCommand");
-    $config['Plugins'][] = 'imageresize';
+	$CommandHandler_ImageResize = new CKFinder_Connector_CommandHandler_ImageResize();
+	$CommandHandler_ImageResizeInfo = new CKFinder_Connector_CommandHandler_ImageResizeInfo();
+	$config['Hooks']['BeforeExecuteCommand'][] = array($CommandHandler_ImageResize, "onBeforeExecuteCommand");
+	$config['Hooks']['BeforeExecuteCommand'][] = array($CommandHandler_ImageResizeInfo, "onBeforeExecuteCommand");
+	$config['Hooks']['InitCommand'][] = array($CommandHandler_ImageResize, "onInitCommand");
+	$config['Plugins'][] = 'imageresize';
 }

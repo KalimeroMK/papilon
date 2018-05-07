@@ -70,7 +70,8 @@ class CKFinder_Connector_CommandHandler_FileEditor extends CKFinder_Connector_Co
         $fp = @fopen($filePath, 'wb');
         if ($fp === false || !flock($fp, LOCK_EX)) {
             $result = false;
-        } else {
+        }
+        else {
             $result = fwrite($fp, $_POST["content"]);
             flock($fp, LOCK_UN);
             fclose($fp);
@@ -83,14 +84,15 @@ class CKFinder_Connector_CommandHandler_FileEditor extends CKFinder_Connector_Co
     /**
      * @access public
      */
-    function onBeforeExecuteCommand(&$command)
+    function onBeforeExecuteCommand( &$command )
     {
-        if ($command == 'SaveFile') {
+        if ( $command == 'SaveFile' )
+        {
             $this->sendResponse();
             return false;
         }
 
-        return true;
+        return true ;
     }
 }
 

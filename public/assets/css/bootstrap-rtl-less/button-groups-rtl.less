@@ -54,7 +54,6 @@
     .border-left-radius(0);
   }
 }
-
 // Need .dropdown-toggle since :last-child doesn't apply given a .dropdown-menu immediately after it
 .btn-group > .btn:last-child:not(:first-child),
 .btn-group > .dropdown-toggle:not(:first-child) {
@@ -65,18 +64,15 @@
 .btn-group > .btn-group {
   float: right;
 }
-
 .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
   border-radius: 0;
 }
-
 .btn-group > .btn-group:first-child {
   > .btn:last-child,
   > .dropdown-toggle {
     .border-left-radius(0);
   }
 }
-
 .btn-group > .btn-group:last-child > .btn:first-child {
   .border-right-radius(0);
 }

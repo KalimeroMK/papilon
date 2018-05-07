@@ -68,8 +68,8 @@ class CKFinder_Connector_Core_Registry
      */
     public function get($key)
     {
-        if ($this->isValid($key)) {
-            return $this->_store[$key];
-        }
+    	if ($this->isValid($key)) {
+    	    return $this->_store[$key];
+    	}
     }
 }

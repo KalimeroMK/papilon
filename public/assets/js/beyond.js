@@ -118,8 +118,8 @@ $.each(popovers, function () {
             html: true,
             template: '<div class="popover ' + $(this)
                 .data("class") +
-            '"><div class="arrow"></div><h3 class="popover-title ' +
-            $(this)
+                '"><div class="arrow"></div><h3 class="popover-title ' +
+                $(this)
                 .data("titleclass") + '">Popover right</h3><div class="popover-content"></div></div>'
         });
 });
@@ -131,8 +131,8 @@ $.each(hoverpopovers, function () {
             html: true,
             template: '<div class="popover ' + $(this)
                 .data("class") +
-            '"><div class="arrow"></div><h3 class="popover-title ' +
-            $(this)
+                '"><div class="arrow"></div><h3 class="popover-title ' +
+                $(this)
                 .data("titleclass") + '">Popover right</h3><div class="popover-content"></div></div>',
             trigger: "hover"
         });
@@ -169,7 +169,7 @@ function InitiateSideMenu() {
         b = $("#sidebar").hasClass("menu-compact");
 
         if ($(".sidebar-menu").closest("div").hasClass("slimScrollDiv")) {
-            $(".sidebar-menu").slimScroll({destroy: true});
+            $(".sidebar-menu").slimScroll({ destroy: true });
             $(".sidebar-menu").attr('style', '');
         }
         if (b) {
@@ -187,6 +187,7 @@ function InitiateSideMenu() {
             }
         }
         //Slim Scroll Handle
+
 
 
     });
@@ -299,7 +300,7 @@ function maximize(widgetbox) {
 /* Scroll To */
 function scrollTo(el, offeset) {
     var pos = (el && el.size() > 0) ? el.offset().top : 0;
-    jQuery('html,body').animate({scrollTop: pos + (offeset ? offeset : 0)}, 'slow');
+    jQuery('html,body').animate({ scrollTop: pos + (offeset ? offeset : 0) }, 'slow');
 }
 
 /*Show Notification*/
@@ -505,12 +506,11 @@ function setCookiesForFixedSettings() {
         }
     } else {
         if ($(".sidebar-menu").closest("div").hasClass("slimScrollDiv")) {
-            $(".sidebar-menu").slimScroll({destroy: true});
+            $(".sidebar-menu").slimScroll({ destroy: true });
             $(".sidebar-menu").attr('style', '');
         }
     }
 }
-
 /*#endregion handle Settings*/
 
 //Chat
@@ -546,7 +546,6 @@ $('.chatbar-contacts .contacts-list').slimscroll({
 //End Chat
 
 /*#region Get Colors*/
-
 //Get colors from a string base on theme colors
 function getcolor(colorString) {
     switch (colorString) {
@@ -564,7 +563,6 @@ function getcolor(colorString) {
             return colorString;
     }
 }
-
 /*#endregion Get Colors*/
 
 

@@ -272,18 +272,14 @@ class ProductsController extends Controller
     {
         $product = Product::FindOrFail($id);
 
-        if($product->image) {
-            // Delete blog images
-            $image = public_path() . '/assets/img/products/' . $product->image;
-            $imagemedium = public_path() . '/assets/img/products/medium/' . $product->image;
-            $imagethumb = public_path() . '/assets/img/products/thumbnails/' . $product->image;
+        // Delete blog images
+        $image = public_path() . '/assets/img/products/' . $product->image;
+        $imagemedium = public_path() . '/assets/img/products/medium/' . $product->image;
+        $imagethumb = public_path() . '/assets/img/products/thumbnails/' . $product->image;
 
-            unlink($image);
-            unlink($imagemedium);
-            unlink($imagethumb);
-        }
-
-
+        unlink($image);
+        unlink($imagemedium);
+        unlink($imagethumb);
 
         $product->delete();
         return redirect('/admin/product');

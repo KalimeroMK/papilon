@@ -74,21 +74,21 @@ class CKFinder_Connector_CommandHandler_Init extends CKFinder_Connector_CommandH
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_CONNECTOR_DISABLED);
         }
 
-        $_ln = '';
-        $_lc = $_config->getLicenseKey() . '                                  ';
-        $pos = strpos(CKFINDER_CHARS, $_lc[0]) % 5;
-        if ($pos == 1 || $pos == 4) {
-            $_ln = $_config->getLicenseName();
+        $_ln = '' ;
+        $_lc = $_config->getLicenseKey() . '                                  ' ;
+        $pos = strpos( CKFINDER_CHARS, $_lc[0] ) % 5;
+        if ( $pos == 1 || $pos == 4 ) {
+            $_ln = $_config->getLicenseName() ;
         }
 
         $_oConnInfo->addAttribute("s", $_ln);
-        $_oConnInfo->addAttribute("c", trim($_lc[11] . $_lc[0] . $_lc [8] . $_lc[12] . $_lc[26] . $_lc[2] . $_lc[3] . $_lc[25] . $_lc[1]));
+        $_oConnInfo->addAttribute("c", trim( $_lc[11] . $_lc[0] . $_lc [8] . $_lc[12] . $_lc[26] . $_lc[2] . $_lc[3] . $_lc[25] . $_lc[1] ));
         $_thumbnailsConfig = $_config->getThumbnailsConfig();
-        $_thumbnailsEnabled = $_thumbnailsConfig->getIsEnabled();
+        $_thumbnailsEnabled = $_thumbnailsConfig->getIsEnabled() ;
         $_oConnInfo->addAttribute("thumbsEnabled", $_thumbnailsEnabled ? "true" : "false");
         if ($_thumbnailsEnabled) {
             $_oConnInfo->addAttribute("thumbsUrl", $_thumbnailsConfig->getUrl());
-            $_oConnInfo->addAttribute("thumbsDirectAccess", $_thumbnailsConfig->getDirectAccess() ? "true" : "false");
+            $_oConnInfo->addAttribute("thumbsDirectAccess", $_thumbnailsConfig->getDirectAccess() ? "true" : "false" );
             $_oConnInfo->addAttribute("thumbsWidth", $_thumbnailsConfig->getMaxWidth());
             $_oConnInfo->addAttribute("thumbsHeight", $_thumbnailsConfig->getMaxHeight());
         }
@@ -115,26 +115,27 @@ class CKFinder_Connector_CommandHandler_Init extends CKFinder_Connector_CommandH
             $phpMaxSize = 0;
             $max_upload = CKFinder_Connector_Utils_Misc::returnBytes(ini_get('upload_max_filesize'));
             if ($max_upload) {
-                $phpMaxSize = $max_upload;
+              $phpMaxSize = $max_upload;
             }
             $max_post = CKFinder_Connector_Utils_Misc::returnBytes(ini_get('post_max_size'));
             if ($max_post) {
-                $phpMaxSize = $phpMaxSize ? min($phpMaxSize, $max_post) : $max_post;
+              $phpMaxSize = $phpMaxSize ? min($phpMaxSize, $max_post) : $max_post;
             }
             //ini_get('memory_limit') only works if compiled with "--enable-memory-limit"
             $memory_limit = CKFinder_Connector_Utils_Misc::returnBytes(@ini_get('memory_limit'));
             if ($memory_limit && $memory_limit != -1) {
-                $phpMaxSize = $phpMaxSize ? min($phpMaxSize, $memory_limit) : $memory_limit;
+              $phpMaxSize = $phpMaxSize ? min($phpMaxSize, $memory_limit) : $memory_limit;
             }
             $_oConnInfo->addAttribute("uploadMaxSize", $phpMaxSize);
             $_oConnInfo->addAttribute("uploadCheckImages", $_config->checkSizeAfterScaling() ? "false" : "true");
-            for ($i = 0; $i < $_aTypesSize; $i++) {
+            for ($i = 0; $i < $_aTypesSize; $i++)
+            {
                 $_resourceTypeName = $_aTypes[$i];
 
                 $_acl = $_config->getAccessControlConfig();
                 $_aclMask = $_acl->getComputedMask($_resourceTypeName, "/");
 
-                if (($_aclMask & CKFINDER_CONNECTOR_ACL_FOLDER_VIEW) != CKFINDER_CONNECTOR_ACL_FOLDER_VIEW) {
+                if ( ($_aclMask & CKFINDER_CONNECTOR_ACL_FOLDER_VIEW) != CKFINDER_CONNECTOR_ACL_FOLDER_VIEW ) {
                     continue;
                 }
 
@@ -154,7 +155,7 @@ class CKFinder_Connector_CommandHandler_Init extends CKFinder_Connector_CommandH
                     $_oResourceType[$i]->addAttribute("acl", $_aclMask);
                     $maxSize = $_oTypeInfo->getMaxSize();
                     if ($phpMaxSize) {
-                        $maxSize = $maxSize ? min($maxSize, $phpMaxSize) : $phpMaxSize;
+                      $maxSize = $maxSize ? min($maxSize, $phpMaxSize) : $phpMaxSize;
                     }
                     $_oResourceType[$i]->addAttribute("maxSize", $maxSize);
                 }
@@ -162,7 +163,7 @@ class CKFinder_Connector_CommandHandler_Init extends CKFinder_Connector_CommandH
         }
 
         $config = $GLOBALS['config'];
-        if (!empty($config['Plugins']) && is_array($config['Plugins'])) {
+        if (!empty($config['Plugins']) && is_array($config['Plugins']) ) {
             $_oConnInfo->addAttribute("plugins", implode(",", $config['Plugins']));
         }
 

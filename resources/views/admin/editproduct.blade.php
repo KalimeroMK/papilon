@@ -34,11 +34,11 @@
 
 
                             <div class="input-group{{ $errors->has('image') ? ' has-error' : '' }}">
-                            <span class="input-group-btn">
-                                <span class="btn btn-info shiny btn-file">
-                                    <i class="btn-label fa fa-image"> </i> Browse... <input type="file" name="image">
-                                </span>
+                        <span class="input-group-btn">
+                            <span class="btn btn-info shiny btn-file">
+                                <i class="btn-label fa fa-image"> </i> Browse... <input type="file" name="image">
                             </span>
+                        </span>
                                 <input type="text" class="form-control" readonly="">
                             </div>
                             <br/>
@@ -51,7 +51,8 @@
                             </div>
                             @if ($errors->has('title')) <p
                                     class="alert alert-danger">{{ $errors->first('title') }}</p> @endif
-                       
+
+
                             <div class="form-group">
                                 <label for="description">Product description</label>
                                 <textarea class="ckeditor" id="elm3"

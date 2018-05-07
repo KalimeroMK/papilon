@@ -4,10 +4,9 @@
 <div class="page-body">
   <div class="row">
     <div class="col-lg-12 col-sm-12 col-xs-12">
-        <p><a class="btn btn-labeled shiny btn-warning btn-large" href="/admin/product/create"> <i
-                        class="btn-label fa fa-plus"></i>Add product </a></p>
-    </div>
-      <div class="col-lg-12">
+          <p><a class="btn btn-labeled shiny btn-warning btn-large" href="/admin/product/create"> <i class="btn-label fa fa-plus"></i>Add product </a></p>
+        </div> 
+ <div class="col-lg-12">
       <div class="widget">
         <div class="widget-header bordered-bottom bordered-themesecondary">
           <i class="widget-icon fa fa-tags themesecondary"></i>

@@ -168,7 +168,7 @@ class Ckfinder_Connector_Utils_XmlNode
         $ret = "<" . $this->_name;
 
         //print Attributes
-        if (sizeof($this->_attributes) > 0) {
+        if (sizeof($this->_attributes)>0) {
             foreach ($this->_attributes as $_name => $_value) {
                 $ret .= " " . $_name . '="' . $this->asUTF8(htmlspecialchars($_value)) . '"';
             }
@@ -189,7 +189,7 @@ class Ckfinder_Connector_Utils_XmlNode
         }
 
         //print child nodes
-        if (sizeof($this->_childNodes) > 0) {
+        if (sizeof($this->_childNodes)>0) {
             foreach ($this->_childNodes as $_node) {
                 $ret .= $_node->asXml();
             }

@@ -17,7 +17,7 @@ var LZString = {
         if (!LZString._baseReverseDic) LZString._baseReverseDic = {};
         if (!LZString._baseReverseDic[alphabet]) {
             LZString._baseReverseDic[alphabet] = {};
-            for (var i = 0; i < alphabet.length; i++) {
+            for (var i = 0 ; i < alphabet.length ; i++) {
                 LZString._baseReverseDic[alphabet][alphabet[i]] = i;
             }
         }
@@ -26,43 +26,31 @@ var LZString = {
 
     compressToBase64: function (input) {
         if (input == null) return "";
-        var res = LZString._compress(input, 6, function (a) {
-            return LZString._keyStrBase64.charAt(a);
-        });
+        var res = LZString._compress(input, 6, function (a) { return LZString._keyStrBase64.charAt(a); });
         switch (res.length % 4) { // To produce valid Base64
             default: // When could this happen ?
-            case 0:
-                return res;
-            case 1:
-                return res + "===";
-            case 2:
-                return res + "==";
-            case 3:
-                return res + "=";
+            case 0: return res;
+            case 1: return res + "===";
+            case 2: return res + "==";
+            case 3: return res + "=";
         }
     },
 
     decompressFromBase64: function (input) {
         if (input == null) return "";
         if (input == "") return null;
-        return LZString._decompress(input.length, 32, function (index) {
-            return LZString._getBaseValue(LZString._keyStrBase64, input.charAt(index));
-        });
+        return LZString._decompress(input.length, 32, function (index) { return LZString._getBaseValue(LZString._keyStrBase64, input.charAt(index)); });
     },
 
     compressToUTF16: function (input) {
         if (input == null) return "";
-        return LZString._compress(input, 15, function (a) {
-            return String.fromCharCode(a + 32);
-        }) + " ";
+        return LZString._compress(input, 15, function (a) { return String.fromCharCode(a + 32); }) + " ";
     },
 
     decompressFromUTF16: function (compressed) {
         if (compressed == null) return "";
         if (compressed == "") return null;
-        return LZString._decompress(compressed.length, 16384, function (index) {
-            return compressed.charCodeAt(index) - 32;
-        });
+        return LZString._decompress(compressed.length, 16384, function (index) { return compressed.charCodeAt(index) - 32; });
     },
 
     //compress into uint8array (UCS-2 big endian format)
@@ -102,9 +90,7 @@ var LZString = {
     //compress into a string that is already URI encoded
     compressToEncodedURIComponent: function (input) {
         if (input == null) return "";
-        return LZString._compress(input, 6, function (a) {
-            return LZString._keyStrUriSafe.charAt(a);
-        });
+        return LZString._compress(input, 6, function (a) { return LZString._keyStrUriSafe.charAt(a); });
     },
 
     //decompress from an output of compressToEncodedURIComponent
@@ -112,15 +98,11 @@ var LZString = {
         if (input == null) return "";
         if (input == "") return null;
         input = input.replace(/ /g, "+");
-        return LZString._decompress(input.length, 32, function (index) {
-            return LZString._getBaseValue(LZString._keyStrUriSafe, input.charAt(index));
-        });
+        return LZString._decompress(input.length, 32, function (index) { return LZString._getBaseValue(LZString._keyStrUriSafe, input.charAt(index)); });
     },
 
     compress: function (uncompressed) {
-        return LZString._compress(uncompressed, 16, function (a) {
-            return String.fromCharCode(a);
-        });
+        return LZString._compress(uncompressed, 16, function (a) { return String.fromCharCode(a); });
     },
     _compress: function (uncompressed, bitsPerChar, getCharFromInt) {
         if (uncompressed == null) return "";
@@ -152,7 +134,7 @@ var LZString = {
             } else {
                 if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate, context_w)) {
                     if (context_w.charCodeAt(0) < 256) {
-                        for (i = 0; i < context_numBits; i++) {
+                        for (i = 0 ; i < context_numBits ; i++) {
                             context_data_val = (context_data_val << 1);
                             if (context_data_position == bitsPerChar - 1) {
                                 context_data_position = 0;
@@ -163,7 +145,7 @@ var LZString = {
                             }
                         }
                         value = context_w.charCodeAt(0);
-                        for (i = 0; i < 8; i++) {
+                        for (i = 0 ; i < 8 ; i++) {
                             context_data_val = (context_data_val << 1) | (value & 1);
                             if (context_data_position == bitsPerChar - 1) {
                                 context_data_position = 0;
@@ -176,7 +158,7 @@ var LZString = {
                         }
                     } else {
                         value = 1;
-                        for (i = 0; i < context_numBits; i++) {
+                        for (i = 0 ; i < context_numBits ; i++) {
                             context_data_val = (context_data_val << 1) | value;
                             if (context_data_position == bitsPerChar - 1) {
                                 context_data_position = 0;
@@ -188,7 +170,7 @@ var LZString = {
                             value = 0;
                         }
                         value = context_w.charCodeAt(0);
-                        for (i = 0; i < 16; i++) {
+                        for (i = 0 ; i < 16 ; i++) {
                             context_data_val = (context_data_val << 1) | (value & 1);
                             if (context_data_position == bitsPerChar - 1) {
                                 context_data_position = 0;
@@ -208,7 +190,7 @@ var LZString = {
                     delete context_dictionaryToCreate[context_w];
                 } else {
                     value = context_dictionary[context_w];
-                    for (i = 0; i < context_numBits; i++) {
+                    for (i = 0 ; i < context_numBits ; i++) {
                         context_data_val = (context_data_val << 1) | (value & 1);
                         if (context_data_position == bitsPerChar - 1) {
                             context_data_position = 0;
@@ -237,7 +219,7 @@ var LZString = {
         if (context_w !== "") {
             if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate, context_w)) {
                 if (context_w.charCodeAt(0) < 256) {
-                    for (i = 0; i < context_numBits; i++) {
+                    for (i = 0 ; i < context_numBits ; i++) {
                         context_data_val = (context_data_val << 1);
                         if (context_data_position == bitsPerChar - 1) {
                             context_data_position = 0;
@@ -248,7 +230,7 @@ var LZString = {
                         }
                     }
                     value = context_w.charCodeAt(0);
-                    for (i = 0; i < 8; i++) {
+                    for (i = 0 ; i < 8 ; i++) {
                         context_data_val = (context_data_val << 1) | (value & 1);
                         if (context_data_position == bitsPerChar - 1) {
                             context_data_position = 0;
@@ -261,7 +243,7 @@ var LZString = {
                     }
                 } else {
                     value = 1;
-                    for (i = 0; i < context_numBits; i++) {
+                    for (i = 0 ; i < context_numBits ; i++) {
                         context_data_val = (context_data_val << 1) | value;
                         if (context_data_position == bitsPerChar - 1) {
                             context_data_position = 0;
@@ -273,7 +255,7 @@ var LZString = {
                         value = 0;
                     }
                     value = context_w.charCodeAt(0);
-                    for (i = 0; i < 16; i++) {
+                    for (i = 0 ; i < 16 ; i++) {
                         context_data_val = (context_data_val << 1) | (value & 1);
                         if (context_data_position == bitsPerChar - 1) {
                             context_data_position = 0;
@@ -293,7 +275,7 @@ var LZString = {
                 delete context_dictionaryToCreate[context_w];
             } else {
                 value = context_dictionary[context_w];
-                for (i = 0; i < context_numBits; i++) {
+                for (i = 0 ; i < context_numBits ; i++) {
                     context_data_val = (context_data_val << 1) | (value & 1);
                     if (context_data_position == bitsPerChar - 1) {
                         context_data_position = 0;
@@ -316,7 +298,7 @@ var LZString = {
 
         // Mark the end of the stream
         value = 2;
-        for (i = 0; i < context_numBits; i++) {
+        for (i = 0 ; i < context_numBits ; i++) {
             context_data_val = (context_data_val << 1) | (value & 1);
             if (context_data_position == bitsPerChar - 1) {
                 context_data_position = 0;
@@ -343,9 +325,7 @@ var LZString = {
     decompress: function (compressed) {
         if (compressed == null) return "";
         if (compressed == "") return null;
-        return LZString._decompress(compressed.length, 32768, function (index) {
-            return compressed.charCodeAt(index);
-        });
+        return LZString._decompress(compressed.length, 32768, function (index) { return compressed.charCodeAt(index); });
     },
 
     _decompress: function (length, resetValue, getNextValue) {
@@ -361,7 +341,7 @@ var LZString = {
             bits, resb, maxpower, power,
             c,
             f = LZString._f,
-            data = {val: getNextValue(0), position: resetValue, index: 1};
+            data = { val: getNextValue(0), position: resetValue, index: 1 };
 
         for (i = 0; i < 3; i += 1) {
             dictionary[i] = i;

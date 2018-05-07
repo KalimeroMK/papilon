@@ -1,14 +1,15 @@
 // Typography
 // -------------------------
-@rtl-font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
-@rtl-font-family-serif: Georgia, "Times New Roman", Times, serif;
-@rtl-font-family-base: @rtl-font-family-sans-serif;
+@rtl-font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+@rtl-font-family-serif:       Georgia, "Times New Roman", Times, serif;
+@rtl-font-family-base:        @rtl-font-family-sans-serif;
 
-@rtl-headings-font-family: @rtl-font-family-base;
+@rtl-headings-font-family:    @rtl-font-family-base;
+
 
 body {
-  direction: rtl;
-  font-family: @rtl-font-family-base;
+    direction: rtl;
+    font-family: @rtl-font-family-base;
 }
 
 // Headings
@@ -18,6 +19,7 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: @rtl-headings-font-family;
 }
+
 
 // Tabs
 // -------------------------
@@ -56,10 +58,11 @@ h1, h2, h3, h4, h5, h6,
   @media (min-width: @screen-sm-min) {
     > li > a {
       border-radius: @border-radius-base @border-radius-base 0 0;
-      color: blue;
+      color:blue;
     }
   }
 }
+
 
 // progress-bar
 // Bar of progress
@@ -74,7 +77,7 @@ h1, h2, h3, h4, h5, h6,
 // Expand the right padding and account for the close button's positioning.
 
 .alert-dismissable {
-  //padding-left: (@alert-padding + 20);
+ //padding-left: (@alert-padding + 20);
 
   // Adjust close link position
   .close {
@@ -94,9 +97,11 @@ h1, h2, h3, h4, h5, h6,
   float: left;
 }
 
+
 //
 // Dropdown menus
 // --------------------------------------------------
+
 
 // Dropdown arrow/caret
 .caret {
@@ -157,6 +162,7 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 
+
 // Pills
 // -------------------------
 .nav-pills {
@@ -174,10 +180,11 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 
+
 // Stacked pills
 .nav-stacked {
   > li {
-    float: none;
+  float: none;
     + li {
       margin-right: 0; // no need for this gap between nav items
     }
@@ -190,6 +197,7 @@ h1, h2, h3, h4, h5, h6,
   padding-right: 0; // Override default ul/ol
 }
 
+
 // Justified nav links
 // -------------------------
 
@@ -197,8 +205,8 @@ h1, h2, h3, h4, h5, h6,
 .nav-pills.nav-justified {
   width: 100%;
   > li {
-    float: none !important;
-    > a {
+    float: none!important;
+     > a {
       text-align: center;
       margin-bottom: 5px;
     }
@@ -221,8 +229,9 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .nav-tabs.nav-justified > li > a {
-  color: @link-color;
+  color:@link-color;
 }
+
 
 // Reverse input group round corners in RTL
 
@@ -235,7 +244,6 @@ h1, h2, h3, h4, h5, h6,
   .border-right-radius(@border-radius-base);
   .border-left-radius(0);
 }
-
 .input-group-addon:first-child {
   border-right: 1px solid @input-group-addon-border-color;
   border-left: 0px;
@@ -300,17 +308,17 @@ h1, h2, h3, h4, h5, h6,
 
 .form-inline {
 
-  // Remove default margin on radios/checkboxes that were used for stacking, and
-  // then undo the floating of radios and checkboxes to match (which also avoids
-  // a bug in WebKit: https://github.com/twbs/bootstrap/issues/1969).
-  .radio,
-  .checkbox {
-    padding-right: 0;
-  }
-  .radio input[type="radio"],
-  .checkbox input[type="checkbox"] {
-    margin-right: 0;
-  }
+    // Remove default margin on radios/checkboxes that were used for stacking, and
+    // then undo the floating of radios and checkboxes to match (which also avoids
+    // a bug in WebKit: https://github.com/twbs/bootstrap/issues/1969).
+    .radio,
+    .checkbox {
+      padding-right: 0;
+    }
+    .radio input[type="radio"],
+    .checkbox input[type="checkbox"] {
+      margin-right: 0;
+    }
 }
 
 // Horizontal forms
@@ -328,15 +336,15 @@ h1, h2, h3, h4, h5, h6,
 // -------------------------
 .popover.top,
 .popover.bottom {
-  direction: ltr
+  direction:ltr
 }
 
 .popover.top .popover-title,
 .popover.top .popover-content,
 .popover.bottom .popover-title,
-.popover.bottom .popover-content {
-  direction: rtl;
-  text-align: right;
+.popover.bottom .popover-content  {
+  direction:rtl;
+  text-align:right;
 }
 
 // Tables
@@ -345,6 +353,7 @@ th {
   text-align: right;
 }
 
-.list-group {
+.list-group
+{
   padding-right: 0;
 }

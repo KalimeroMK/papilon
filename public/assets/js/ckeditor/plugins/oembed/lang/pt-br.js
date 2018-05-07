@@ -1,7 +1,7 @@
 CKEDITOR.plugins.setLang('oembed', 'pt-br', {
     title: "Conteúdo embed de mídia (foto, vídeo, audio, rich)",
     button: "Conteúdo embed de mídia de vários sites",
-    pasteUrl: "Cole aqui a URL (inclusive URLs encurtadas) de um dos sites que o plugin suporta (ex. YouTube, Flickr, Qik, Vimeo, Hulu, Viddler, MyOpera, etc.) ...",
+	pasteUrl: "Cole aqui a URL (inclusive URLs encurtadas) de um dos sites que o plugin suporta (ex. YouTube, Flickr, Qik, Vimeo, Hulu, Viddler, MyOpera, etc.) ...",
     invalidUrl: "Por favor informe uma URL válida!",
     noEmbedCode: "Nenhum código embed foi encontrado, ou esse site não está na lista dos sites suportados pelo plugin!",
     url: "URL:",
@@ -14,7 +14,7 @@ CKEDITOR.plugins.setLang('oembed', 'pt-br', {
     maxWidthTitle: "Largura máxima do conteúdo embeded",
     maxHeightTitle: "Altura máxima do conteúdo embeded",
     resizeType: "Tipo de redimensionamento (Somente para video):",
-    none: 'None',
+    none:'None',
     noresize: "Sem redimensionamento (default)",
     responsive: "Redimensionamento responsivo",
     custom: "Redimensionamento específico",

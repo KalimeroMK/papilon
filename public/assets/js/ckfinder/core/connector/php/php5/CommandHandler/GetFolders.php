@@ -77,9 +77,9 @@ class CKFinder_Connector_CommandHandler_GetFolders extends CKFinder_Connector_Co
 
         $resourceTypeInfo = $this->_currentFolder->getResourceTypeConfig();
 
-        if (sizeof($files) > 0) {
+        if (sizeof($files)>0) {
             natcasesort($files);
-            $i = 0;
+            $i=0;
             foreach ($files as $file) {
                 $oAcl = $_config->getAccessControlConfig();
                 $folderPath = $this->_currentFolder->getClientPath() . $file . "/";

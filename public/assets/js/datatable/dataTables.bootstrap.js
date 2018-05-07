@@ -8,6 +8,8 @@ $.extend(true, $.fn.dataTable.defaults, {
 });
 
 
+
+
 /* Default class modification */
 $.extend($.fn.dataTableExt.oStdClasses, {
     "sWrapper": "dataTables_wrapper form-inline",
@@ -25,9 +27,9 @@ $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
         "iTotal": oSettings.fnRecordsTotal(),
         "iFilteredTotal": oSettings.fnRecordsDisplay(),
         "iPage": oSettings._iDisplayLength === -1 ?
-            0 : Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+			0 : Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
         "iTotalPages": oSettings._iDisplayLength === -1 ?
-            0 : Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
+			0 : Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
     };
 };
 
@@ -45,14 +47,14 @@ $.extend($.fn.dataTableExt.oPagination, {
             };
 
             $(nPaging).append(
-                '<ul class="pagination">' +
-                '<li class="prev disabled"><a href="#">' + oLang.sPrevious + '</a></li>' +
-                '<li class="next disabled"><a href="#">' + oLang.sNext + '</a></li>' +
-                '</ul>'
-            );
+				'<ul class="pagination">' +
+					'<li class="prev disabled"><a href="#">' + oLang.sPrevious + '</a></li>' +
+					'<li class="next disabled"><a href="#">' + oLang.sNext + '</a></li>' +
+				'</ul>'
+			);
             var els = $('a', nPaging);
-            $(els[0]).bind('click.DT', {action: "previous"}, fnClickHandler);
-            $(els[1]).bind('click.DT', {action: "next"}, fnClickHandler);
+            $(els[0]).bind('click.DT', { action: "previous" }, fnClickHandler);
+            $(els[1]).bind('click.DT', { action: "next" }, fnClickHandler);
         },
 
         "fnUpdate": function (oSettings, fnDraw) {
@@ -76,20 +78,20 @@ $.extend($.fn.dataTableExt.oPagination, {
                 iEnd = iStart + iListLength - 1;
             }
 
-            for (i = 0, ien = an.length; i < ien; i++) {
+            for (i = 0, ien = an.length ; i < ien ; i++) {
                 // Remove the middle elements
                 $('li:gt(0)', an[i]).filter(':not(:last)').remove();
 
                 // Add the new list items and their event handlers
-                for (j = iStart; j <= iEnd; j++) {
+                for (j = iStart ; j <= iEnd ; j++) {
                     sClass = (j == oPaging.iPage + 1) ? 'class="active"' : '';
                     $('<li ' + sClass + '><a href="#">' + j + '</a></li>')
-                        .insertBefore($('li:last', an[i])[0])
-                        .bind('click', function (e) {
-                            e.preventDefault();
-                            oSettings._iDisplayStart = (parseInt($('a', this).text(), 10) - 1) * oPaging.iLength;
-                            fnDraw(oSettings);
-                        });
+						.insertBefore($('li:last', an[i])[0])
+						.bind('click', function (e) {
+						    e.preventDefault();
+						    oSettings._iDisplayStart = (parseInt($('a', this).text(), 10) - 1) * oPaging.iLength;
+						    fnDraw(oSettings);
+						});
                 }
 
                 // Add / remove disabled classes from the static elements

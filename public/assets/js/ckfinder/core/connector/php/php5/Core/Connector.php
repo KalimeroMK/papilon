@@ -64,25 +64,26 @@ class CKFinder_Connector_Core_Connector
             return;
         }
 
-        switch ($command) {
+        switch ($command)
+        {
             case 'FileUpload':
-                $this->_registry->set("errorHandler", "ErrorHandler_FileUpload");
-                $obj =& CKFinder_Connector_Core_Factory::getInstance("CommandHandler_" . $command);
-                $obj->sendResponse();
-                break;
+            $this->_registry->set("errorHandler", "ErrorHandler_FileUpload");
+            $obj =& CKFinder_Connector_Core_Factory::getInstance("CommandHandler_".$command);
+            $obj->sendResponse();
+            break;
 
             case 'QuickUpload':
-                $this->_registry->set("errorHandler", "ErrorHandler_QuickUpload");
-                $obj =& CKFinder_Connector_Core_Factory::getInstance("CommandHandler_" . $command);
-                $obj->sendResponse();
-                break;
+            $this->_registry->set("errorHandler", "ErrorHandler_QuickUpload");
+            $obj =& CKFinder_Connector_Core_Factory::getInstance("CommandHandler_".$command);
+            $obj->sendResponse();
+            break;
 
             case 'DownloadFile':
             case 'Thumbnail':
-                $this->_registry->set("errorHandler", "ErrorHandler_Http");
-                $obj =& CKFinder_Connector_Core_Factory::getInstance("CommandHandler_" . $command);
-                $obj->sendResponse();
-                break;
+            $this->_registry->set("errorHandler", "ErrorHandler_Http");
+            $obj =& CKFinder_Connector_Core_Factory::getInstance("CommandHandler_".$command);
+            $obj->sendResponse();
+            break;
 
             case 'CopyFiles':
             case 'CreateFolder':
@@ -95,13 +96,13 @@ class CKFinder_Connector_Core_Connector
             case 'MoveFiles':
             case 'RenameFile':
             case 'RenameFolder':
-                $obj =& CKFinder_Connector_Core_Factory::getInstance("CommandHandler_" . $command);
-                $obj->sendResponse();
-                break;
+            $obj =& CKFinder_Connector_Core_Factory::getInstance("CommandHandler_".$command);
+            $obj->sendResponse();
+            break;
 
             default:
-                $this->handleInvalidCommand();
-                break;
+            $this->handleInvalidCommand();
+            break;
         }
     }
 

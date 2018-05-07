@@ -6,7 +6,7 @@
         this.currentStep = 1;
         this.numSteps = this.$element.find("li").length;
         /*Customized to Enable Out Of Wizard Buttons*/
-        this.$prevBtn = $('#' + this.$element[0].id + '-actions').find("button.btn-prev");
+        this.$prevBtn = $('#'+this.$element[0].id+'-actions').find("button.btn-prev");
         this.$nextBtn = $('#' + this.$element[0].id + '-actions').find("button.btn-next");
         /*End Customized to Enable Out Of Wizard Buttons*/
         d = this.$nextBtn.children().detach();

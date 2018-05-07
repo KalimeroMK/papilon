@@ -106,7 +106,8 @@ class CKFinder_Connector_Core_FolderHandler
 
         if (!strlen($this->_clientPath)) {
             $this->_clientPath = "/";
-        } else {
+        }
+        else {
             if (substr($this->_clientPath, -1, 1) != "/") {
                 $this->_clientPath .= "/";
             }
@@ -177,7 +178,8 @@ class CKFinder_Connector_Core_FolderHandler
                 $oErrorHandler =& $connector->getErrorHandler();
                 $oErrorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_TYPE);
                 $this->_url = "";
-            } else {
+            }
+            else {
                 $this->_url = $this->_resourceTypeConfig->getUrl() . ltrim($this->getClientPath(), "/");
             }
         }
@@ -222,7 +224,7 @@ class CKFinder_Connector_Core_FolderHandler
             $this->_thumbsServerPath = CKFinder_Connector_Utils_FileSystem::combinePaths($this->_thumbsServerPath, ltrim($this->_clientPath, '/'));
 
             if (!is_dir($this->_thumbsServerPath)) {
-                if (!CKFinder_Connector_Utils_FileSystem::createDirectoryRecursively($this->_thumbsServerPath)) {
+                if(!CKFinder_Connector_Utils_FileSystem::createDirectoryRecursively($this->_thumbsServerPath)) {
                     /**
                      * @todo  Ckfinder_Connector_Utils_Xml::raiseError(); perhaps we should return error
                      *

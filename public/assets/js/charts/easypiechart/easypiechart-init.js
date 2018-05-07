@@ -1,4 +1,5 @@
-﻿var gridbordercolor = "#eee";
+﻿
+var gridbordercolor = "#eee";
 
 var InitiateEasyPieChart = function () {
     return {
@@ -20,7 +21,7 @@ var InitiateEasyPieChart = function () {
                     lineCap: lineCap,
                     lineWidth: lineWidth,
                     size: size,
-                    animate: animate
+                    animate : animate
                 });
             });
         }

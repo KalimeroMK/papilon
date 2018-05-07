@@ -54,12 +54,12 @@ class CKFinder_Connector_Core_Factory
     {
         $namespace = "CKFinder_Connector_";
 
-        $baseName = str_replace($namespace, "", $className);
+        $baseName = str_replace($namespace,"",$className);
 
-        $className = $namespace . $baseName;
+        $className = $namespace.$baseName;
 
         if (!isset(CKFinder_Connector_Core_Factory::$instances[$className])) {
-            require_once CKFINDER_CONNECTOR_LIB_DIR . "/" . str_replace("_", "/", $baseName) . ".php";
+            require_once CKFINDER_CONNECTOR_LIB_DIR . "/" . str_replace("_","/",$baseName).".php";
             CKFinder_Connector_Core_Factory::$instances[$className] = new $className;
         }
 

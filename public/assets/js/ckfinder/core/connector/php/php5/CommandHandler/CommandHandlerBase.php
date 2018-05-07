@@ -120,7 +120,8 @@ class CKFinder_Connector_CommandHandler_CommandHandlerBase
                      * @todo handle error
                      */
                 }
-            } else {
+            }
+            else {
                 $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_FOLDER_NOT_FOUND);
             }
         }

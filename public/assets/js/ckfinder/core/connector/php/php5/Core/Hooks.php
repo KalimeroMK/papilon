@@ -57,11 +57,13 @@ class CKFinder_Connector_Core_Hooks
             //function
             if (is_string($hook)) {
                 $function = $hook;
-            } //object
+            }
+            //object
             else if (is_object($hook)) {
                 $object = $hooks[$event][$i];
                 $method = "on" . $event;
-            } //array of...
+            }
+            //array of...
             else if (is_array($hook)) {
                 $count = count($hook);
                 if ($count) {
@@ -79,7 +81,8 @@ class CKFinder_Connector_Core_Hooks
                                 $data = $hook[2];
                             }
                         }
-                    } //...function
+                    }
+                    //...function
                     else if (is_string($hook[0])) {
                         $function = $hook[0];
                         if ($count > 1) {
@@ -98,18 +101,21 @@ class CKFinder_Connector_Core_Hooks
 
             if (isset($object)) {
                 $callback = array($object, $method);
-            } else if (false !== ($pos = strpos($function, '::'))) {
+            }
+            else if (false !== ($pos = strpos($function, '::'))) {
                 $callback = array(substr($function, 0, $pos), substr($function, $pos + 2));
-            } else {
+            }
+            else {
                 $callback = $function;
             }
 
             if (is_callable($callback)) {
                 $ret = call_user_func_array($callback, $args);
-            } else {
+            }
+            else {
                 $functionName = CKFinder_Connector_Core_Hooks::_printCallback($callback);
                 $errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_CUSTOM_ERROR,
-                    "CKFinder failed to call a hook: " . $functionName);
+                "CKFinder failed to call a hook: " . $functionName);
                 return false;
             }
 
@@ -126,14 +132,16 @@ class CKFinder_Connector_Core_Hooks
             else if (is_int($ret)) {
                 $errorHandler->throwError($ret);
                 return false;
-            } //no value returned
-            else if ($ret === null) {
+            }
+            //no value returned
+            else if( $ret === null ) {
                 $functionName = CKFinder_Connector_Core_Hooks::_printCallback($callback);
                 $errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_CUSTOM_ERROR,
-                    "CKFinder extension returned an invalid value (null)." .
-                    "Hook " . $functionName . " should return a value.");
+                "CKFinder extension returned an invalid value (null)." .
+                "Hook " . $functionName . " should return a value.");
                 return false;
-            } else if (!$ret) {
+            }
+            else if (!$ret) {
                 return false;
             }
         }
@@ -156,7 +164,8 @@ class CKFinder_Connector_Core_Hooks
                 $className = strval($callback[0]);
             }
             $functionName = $className . '::' . strval($callback[1]);
-        } else {
+        }
+        else {
             $functionName = strval($callback);
         }
         return $functionName;

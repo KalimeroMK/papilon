@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
 	protected $table = 'blog';
-	protected $fillable = array('title', 'subtitle','slug','image','imagemedium','imagethumb','description','region_id','country_id','user_id','creator','lat','lng','workflow_id');
+	protected $fillable = array('title', 'subtitle','slug','image','imagemedium','imagethumb','description','country_id','user_id','creator','lat','lng','workflow_id');
 
 	public function createdby()
 	{
@@ -23,8 +23,5 @@ class Blog extends Model
 	{
 		return $this->belongsTo('App\Workflow','workflow_id','id');
 	}
-
-
-
 
 }

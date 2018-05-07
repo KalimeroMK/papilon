@@ -44,7 +44,7 @@ class CKFinder_Connector_CommandHandler_Thumbnail extends CKFinder_Connector_Com
     {
         // Get rid of BOM markers
         if (ob_get_level()) {
-            while (@ob_end_clean() && ob_get_level()) ;
+            while (@ob_end_clean() && ob_get_level());
         }
         header("Content-Encoding: none");
 
@@ -83,7 +83,7 @@ class CKFinder_Connector_CommandHandler_Thumbnail extends CKFinder_Connector_Com
 
         // If the thumbnail file doesn't exists, create it now.
         if (!file_exists($thumbFilePath)) {
-            if (!$this->createThumb($sourceFilePath, $thumbFilePath, $_thumbnails->getMaxWidth(), $_thumbnails->getMaxHeight(), $_thumbnails->getQuality(), true, $_thumbnails->getBmpSupported())) {
+            if(!$this->createThumb($sourceFilePath, $thumbFilePath, $_thumbnails->getMaxWidth(), $_thumbnails->getMaxHeight(), $_thumbnails->getQuality(), true, $_thumbnails->getBmpSupported())) {
                 $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_ACCESS_DENIED);
             }
         }
@@ -92,15 +92,16 @@ class CKFinder_Connector_CommandHandler_Thumbnail extends CKFinder_Connector_Com
         $sourceImageAttr = getimagesize($thumbFilePath);
         $mime = $sourceImageAttr["mime"];
 
-        $rtime = isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) ? @strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"]) : 0;
-        $mtime = filemtime($thumbFilePath);
+        $rtime = isset($_SERVER["HTTP_IF_MODIFIED_SINCE"])?@strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"]):0;
+        $mtime =  filemtime($thumbFilePath);
         $etag = dechex($mtime) . "-" . dechex($size);
 
         $is304 = false;
 
         if (isset($_SERVER["HTTP_IF_NONE_MATCH"]) && $_SERVER["HTTP_IF_NONE_MATCH"] === $etag) {
             $is304 = true;
-        } else if ($rtime == $mtime) {
+        }
+        else if($rtime == $mtime) {
             $is304 = true;
         }
 
@@ -115,10 +116,10 @@ class CKFinder_Connector_CommandHandler_Thumbnail extends CKFinder_Connector_Com
         header('Cache-control: public');
         header('Etag: ' . $etag);
         header("Content-type: " . $mime . "; name=\"" . CKFinder_Connector_Utils_Misc::mbBasename($thumbFilePath) . "\"");
-        header("Last-Modified: " . gmdate('D, d M Y H:i:s', $mtime) . " GMT");
+        header("Last-Modified: ".gmdate('D, d M Y H:i:s', $mtime) . " GMT");
         //header("Content-type: application/octet-stream; name=\"{$file}\"");
         //header("Content-Disposition: attachment; filename=\"{$file}\"");
-        header("Content-Length: " . $size);
+        header("Content-Length: ".$size);
         readfile($thumbFilePath);
         exit;
     }
@@ -162,16 +163,19 @@ class CKFinder_Connector_CommandHandler_Thumbnail extends CKFinder_Connector_Com
             return true;
         }
 
-        if ($preserverAspectRatio) {
+        if ($preserverAspectRatio)
+        {
             // Gets the best size for aspect ratio resampling
-            $oSize = CKFinder_Connector_CommandHandler_Thumbnail::GetAspectRatioSize($iFinalWidth, $iFinalHeight, $sourceImageWidth, $sourceImageHeight);
-        } else {
+            $oSize = CKFinder_Connector_CommandHandler_Thumbnail::GetAspectRatioSize($iFinalWidth, $iFinalHeight, $sourceImageWidth, $sourceImageHeight );
+        }
+        else {
             $oSize = array('Width' => $iFinalWidth, 'Height' => $iFinalHeight);
         }
 
         CKFinder_Connector_Utils_Misc::setMemoryForImage($sourceImageWidth, $sourceImageHeight, $sourceImageBits, $sourceImageChannels);
 
-        switch ($sourceImageAttr['mime']) {
+        switch ($sourceImageAttr['mime'])
+        {
             case 'image/gif':
                 {
                     if (@imagetypes() & IMG_GIF) {
@@ -184,7 +188,7 @@ class CKFinder_Connector_CommandHandler_Thumbnail extends CKFinder_Connector_Com
             case 'image/jpeg':
                 {
                     if (@imagetypes() & IMG_JPG) {
-                        $oImage = @imagecreatefromjpeg($sourceFile);
+                        $oImage = @imagecreatefromjpeg($sourceFile) ;
                     } else {
                         $ermsg = 'JPEG images are not supported';
                     }
@@ -193,7 +197,7 @@ class CKFinder_Connector_CommandHandler_Thumbnail extends CKFinder_Connector_Com
             case 'image/png':
                 {
                     if (@imagetypes() & IMG_PNG) {
-                        $oImage = @imagecreatefrompng($sourceFile);
+                        $oImage = @imagecreatefrompng($sourceFile) ;
                     } else {
                         $ermsg = 'PNG images are not supported';
                     }
@@ -224,7 +228,7 @@ class CKFinder_Connector_CommandHandler_Thumbnail extends CKFinder_Connector_Com
                 }
                 break;
             default:
-                $ermsg = $sourceImageAttr['mime'] . ' images are not supported';
+                $ermsg = $sourceImageAttr['mime'].' images are not supported';
                 break;
         }
 
@@ -235,17 +239,19 @@ class CKFinder_Connector_CommandHandler_Thumbnail extends CKFinder_Connector_Com
 
         $oThumbImage = imagecreatetruecolor($oSize["Width"], $oSize["Height"]);
 
-        if ($sourceImageAttr['mime'] == 'image/png') {
+        if ($sourceImageAttr['mime'] == 'image/png')
+        {
             $bg = imagecolorallocatealpha($oThumbImage, 255, 255, 255, 127); // (PHP 4 >= 4.3.2, PHP 5)
-            imagefill($oThumbImage, 0, 0, $bg);
+            imagefill($oThumbImage, 0, 0 , $bg);
             imagealphablending($oThumbImage, false);
             imagesavealpha($oThumbImage, true);
         }
 
         //imagecopyresampled($oThumbImage, $oImage, 0, 0, 0, 0, $oSize["Width"], $oSize["Height"], $sourceImageWidth, $sourceImageHeight);
-        CKFinder_Connector_Utils_Misc::fastImageCopyResampled($oThumbImage, $oImage, 0, 0, 0, 0, $oSize["Width"], $oSize["Height"], $sourceImageWidth, $sourceImageHeight, (int)max(floor($quality / 20), 6));
+        CKFinder_Connector_Utils_Misc::fastImageCopyResampled($oThumbImage, $oImage, 0, 0, 0, 0, $oSize["Width"], $oSize["Height"], $sourceImageWidth, $sourceImageHeight, (int)max(floor($quality/20), 6));
 
-        switch ($sourceImageAttr['mime']) {
+        switch ($sourceImageAttr['mime'])
+        {
             case 'image/gif':
                 imagegif($oThumbImage, $targetFile);
                 break;
@@ -275,6 +281,7 @@ class CKFinder_Connector_CommandHandler_Thumbnail extends CKFinder_Connector_Com
     }
 
 
+
     /**
      * Return aspect ratio size, returns associative array:
      * <pre>
@@ -295,18 +302,20 @@ class CKFinder_Connector_CommandHandler_Thumbnail extends CKFinder_Connector_Com
      */
     public static function getAspectRatioSize($maxWidth, $maxHeight, $actualWidth, $actualHeight)
     {
-        $oSize = array("Width" => $maxWidth, "Height" => $maxHeight);
+        $oSize = array("Width"=>$maxWidth, "Height"=>$maxHeight);
 
         // Calculates the X and Y resize factors
         $iFactorX = (float)$maxWidth / (float)$actualWidth;
         $iFactorY = (float)$maxHeight / (float)$actualHeight;
 
         // If some dimension have to be scaled
-        if ($iFactorX != 1 || $iFactorY != 1) {
+        if ($iFactorX != 1 || $iFactorY != 1)
+        {
             // Uses the lower Factor to scale the oposite size
             if ($iFactorX < $iFactorY) {
                 $oSize["Height"] = (int)round($actualHeight * $iFactorX);
-            } else if ($iFactorX > $iFactorY) {
+            }
+            else if ($iFactorX > $iFactorY) {
                 $oSize["Width"] = (int)round($actualWidth * $iFactorY);
             }
         }
