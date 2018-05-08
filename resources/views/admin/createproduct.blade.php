@@ -75,44 +75,53 @@
                             <input type="text" class="form-control" placeholder="50 метри од плажа" name="location">
                             @if ($errors->has('description')) <p
                                     class="alert alert-danger">{{ $errors->first('description') }}</p> @endif
-                            <br>
-                            <div class="form-group">
-                                <input type="text" id="searchmap" class="form-control">
-                                <div id="map-canvas"></div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="user">User</label>
-                                <select name="user_id" id="user" class="form-control">
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}"
-                                                @if(Auth::user()->id == $user->id) selected @endif >{{ $user->name }}</option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Workflow: </label>
-                                @foreach($workflows as $workflow)
-                                    <label>
-                                        <input name="workflow_id" type="radio"
-                                               class="form-control {{ $workflow->color }}" value="{{ $workflow->id }}"
-                                               @if($workflow->id  == 1) checked @endif>
-                                        <span class="text"> {{ $workflow->name }}</span>
-                                    </label>
-                                @endforeach
-                            </div>
-                            <!-- Hidden inputs -->
-                            <input type="hidden" name="creator" value="{{ Auth::user()->id  }}">
-                            <button type="submit" class="btn btn-labeled shiny btn-warning btn-large"><i
-                                        class="btn-label fa fa-plus"></i> Create
-                            </button>
-                            {!! Form::close() !!}
+                            <label for="taksa">Turistucka taksa</label>
+                            <input type="text" class="form-control"
+                                   placeholder="Цена на туристицка такса..."
+                                   name="taksa">
                         </div>
+                        @if ($errors->has('taksa')) <p
+                                class="alert alert-danger">{{ $errors->first('taksa') }}</p> @endif
+                        <br>
+                        <div class="form-group">
+                            <input type="text" id="searchmap" class="form-control">
+                            <div id="map-canvas"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user">User</label>
+                            <select name="user_id" id="user" class="form-control">
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}"
+                                            @if(Auth::user()->id == $user->id) selected @endif >{{ $user->name }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Workflow: </label>
+                            @foreach($workflows as $workflow)
+                                <label>
+                                    <input name="workflow_id" type="radio"
+                                           class="form-control {{ $workflow->color }}" value="{{ $workflow->id }}"
+                                           @if($workflow->id  == 1) checked @endif>
+                                    <span class="text"> {{ $workflow->name }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                        <!-- Hidden inputs -->
+                        <input type="hidden" name="creator" value="{{ Auth::user()->id  }}">
+                        <input type="hidden" id="lat" class="form-control" name="lat">
+                        <input type="hidden" id="lng" class="form-control" name="lng">
+                        <button type="submit" class="btn btn-labeled shiny btn-warning btn-large"><i
+                                    class="btn-label fa fa-plus"></i> Create
+                        </button>
+                        {!! Form::close() !!}
                     </div>
-                </div><!--zavrsuva widget -->
-            </div>
+                </div>
+            </div><!--zavrsuva widget -->
         </div>
+    </div>
     </div>
 @endsection
 @section('scripts')

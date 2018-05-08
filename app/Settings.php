@@ -8,9 +8,8 @@ class Settings extends Model
 {
 
     protected $table = 'settigs';
-    protected $fillable = ['title', 'mainurl', 'email','link','address',
-        'logo', 'logomedium', 'logothumb', 'description', 'user_id', 'workflow_id', 'created_at', 'updated_at',
-        'phone','twitter','facebook','linkedin','gplus','youtube','flickr','pinterest','lat','lng'
+    protected $fillable = ['title', 'mainurl', 'email', 'link', 'address',
+        'logo', 'logomedium', 'logothumb', 'description', 'user_id', 'workflow_id', 'created_at', 'updated_at', 'phone', 'twitter', 'facebook', 'linkedin', 'gplus', 'youtube', 'flickr', 'pinterest', 'lat', 'lng'
     ];
 
 
