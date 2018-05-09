@@ -63,7 +63,7 @@
 
                         <label for="roominfo">Room info</label>
                         <input type="text" class="form-control"
-                               placeholder="Тераса, клима, фрижидер, Кујна, бања, тераса, клима" name="roominfo">
+                               placeholder="Тераса, клима, фрижидер, Кујна, бања," name="roominfo">
                         @if ($errors->has('roominfo'))
                             <p class="alert alert-danger">{{ $errors->first('roominfo') }}</p> @endif
                         <label for="price">Price</label>
