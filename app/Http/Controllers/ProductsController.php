@@ -2,258 +2,236 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Product as Product;
-use App\Workflow as Workflow;
 use App\Category as Category;
+use App\Product as Product;
 use App\User as User;
-use Validator;
-use Intervention\Image\ImageManagerStatic as Image;
-use Input;
-use Session;
+use App\Workflow as Workflow;
 use DB;
+use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
+use Session;
+use Validator;
 
-class ProductsController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $products = Product::orderBy('created_at', 'asc')->paginate(10);
-        $data = ['products' => $products];
-        return view('admin.product')->with($data);
-    }
+class ProductsController extends Controller {
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index() {
+		$products = Product::orderBy('created_at', 'asc')->paginate(10);
+		$data = ['products' => $products];
+		return view('admin.product')->with($data);
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $categories = Category::get();
-        $users = User::get();
-        $workflows = Workflow::orderBy('id', 'desc')->get();
-        $data = ['categories' => $categories, 'users' => $users, 'workflows' => $workflows];
-        return view('admin.createproduct')->with($data);
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create() {
+		$categories = Category::get();
+		$users = User::get();
+		$workflows = Workflow::orderBy('id', 'desc')->get();
+		$data = ['categories' => $categories, 'users' => $users, 'workflows' => $workflows];
+		return view('admin.createproduct')->with($data);
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $errors = Validator::make($request->all(), [
-            'title' => 'required|max:255',
-            'description' => 'required',
-            'image' => 'required',
-            'hotelinfo' => 'required',
-            'roominfo' => 'required',
-            'location' => 'required',
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request) {
+		$errors = Validator::make($request->all(), [
+			'title' => 'required|max:255',
+			'description' => 'required',
+			'image' => 'required',
+			'hotelinfo' => 'required',
+			'roominfo' => 'required',
+			'location' => 'required',
 
+		]);
 
-        ]);
+		if ($errors->fails()) {
+			return redirect()->back()
+				->withErrors($errors)
+				->withInput();
+		}
 
-        if ($errors->fails()) {
-            return redirect()->back()
-                ->withErrors($errors)
-                ->withInput();
-        }
+		$request['title'] = strip_tags($request['title']);
+		$request['slug'] = str_slug($request['title']);
 
-        $request['title'] = strip_tags($request['title']);
-        $request['slug'] = str_slug($request['title']);
+		$slug = Product::where('title', $request['title'])->get();
 
-        $slug = Product::where('title', $request['title'])->get();
+		(int) $count = count($slug);
 
-        (int)$count = count($slug);
+		if ($count > 0) {
+			$request['slug'] = $request['slug'] . '-' . $count;
+		}
 
-        if ($count > 0) $request['slug'] = $request['slug'] . '-' . $count;
+		$input = $request->all();
 
+		if ($request->hasFile('image')) {
 
-        $input = $request->all();
+			$image = $request->file('image');
+			$path = public_path() . '/assets/img/products';
+			$pathThumb = public_path() . '/assets/img/products/thumbnails/';
+			$pathMedium = public_path() . '/assets/img/products/medium/';
+			$ext = $image->getClientOriginalExtension();
 
+			if ($count > 0) {
+				$imageName = str_slug($input['title']) . '-' . $count . '.' . $ext;
+			} else {
+				$imageName = str_slug($input['title']) . '.' . $ext;
+			}
 
-        if ($request->hasFile('image')) {
+			$image->move($path, $imageName);
 
-            $image = $request->file('image');
-            $path = public_path() . '/assets/img/products';
-            $pathThumb = public_path() . '/assets/img/products/thumbnails/';
-            $pathMedium = public_path() . '/assets/img/products/medium/';
-            $ext = $image->getClientOriginalExtension();
+			$findimage = public_path() . '/assets/img/products/' . $imageName;
+			$imagethumb = Image::make($findimage)->resize(200, null, function ($constraint) {
+				$constraint->aspectRatio();
+			});
 
+			$imagemedium = Image::make($findimage)->resize(600, null, function ($constraint) {
+				$constraint->aspectRatio();
+			});
+			$imagethumb->save($pathThumb . $imageName);
+			$imagemedium->save($pathMedium . $imageName);
 
-            if ($count > 0) {
-                $imageName = str_slug($input['title']) . '-' . $count . '.' . $ext;
-            } else {
-                $imageName = str_slug($input['title']) . '.' . $ext;
-            }
+			$image = $request->imagethumb = $imageName;
+			$imagethumb = $request->image = $imageName;
+			$imagemedium = $request->image = $imageName;
 
+		}
 
-            $image->move($path, $imageName);
+		$input['image'] = $image;
+		$input['imagemedium'] = $imagemedium;
+		$input['imagethumb'] = $imagethumb;
 
-            $findimage = public_path() . '/assets/img/products/' . $imageName;
-            $imagethumb = Image::make($findimage)->resize(200, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+		$product = Product::create($input);
 
-            $imagemedium = Image::make($findimage)->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $imagethumb->save($pathThumb . $imageName);
-            $imagemedium->save($pathMedium . $imageName);
+		Session::flash('flash_message', 'Product successfully created!');
 
-            $image = $request->imagethumb = $imageName;
-            $imagethumb = $request->image = $imageName;
-            $imagemedium = $request->image = $imageName;
+		return redirect()->back();
+	}
 
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($id) {
+		//
+	}
 
-        }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit($id) {
+		$product = Product::FindOrFail($id);
+		$categories = Category::get();
+		$users = User::get();
+		$workflows = Workflow::orderBy('id', 'desc')->get();
+		$data = ['product' => $product, 'categories' => $categories, 'users' => $users, 'workflows' => $workflows];
+		return view('admin.editproduct')->with($data);
+	}
 
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @param  int $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, $id) {
+		$errors = Validator::make($request->all(), [
+			'title' => 'required|max:255',
+			'description' => 'required',
+		]);
 
-        $input['image'] = $image;
-        $input['imagemedium'] = $imagemedium;
-        $input['imagethumb'] = $imagethumb;
+		if ($errors->fails()) {
+			return redirect()->back()
+				->withErrors($errors)
+				->withInput();
+		}
 
+		$request['title'] = strip_tags($request['title']);
 
-        $product = Product::create($input);
+		$slug = DB::table('product')->select('slug')->where('id', '=', $id)->get();
 
-        Session::flash('flash_message', 'Product successfully created!');
+		$slugname = $slug[0]->slug;
 
-        return redirect()->back();
-    }
+		$input = $request->all();
+		$product = Product::FindOrFail($id);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+		$product->fill($input)->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $product = Product::FindOrFail($id);
-        $categories = Category::get();
-        $users = User::get();
-        $workflows = Workflow::orderBy('id', 'desc')->get();
-        $data = ['product' => $product, 'categories' => $categories, 'users' => $users, 'workflows' => $workflows];
-        return view('admin.editproduct')->with($data);
-    }
+		if ($request->hasFile('image')) {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $errors = Validator::make($request->all(), [
-            'title' => 'required|max:255',
-            'description' => 'required',
-        ]);
+			$image = $request->file('image');
+			$path = public_path() . '/assets/img/products';
+			$pathThumb = public_path() . '/assets/img/products/thumbnails/';
+			$pathMedium = public_path() . '/assets/img/products/medium/';
+			$ext = $image->getClientOriginalExtension();
 
-        if ($errors->fails()) {
-            return redirect()->back()
-                ->withErrors($errors)
-                ->withInput();
-        }
+			$imageName = $slugname . '.' . $ext;
 
-        $request['title'] = strip_tags($request['title']);
+			$image->move($path, $imageName);
 
-        $slug = DB::table('product')->select('slug')->where('id', '=', $id)->get();
+			$findimage = public_path() . '/assets/img/products/' . $imageName;
+			$imagethumb = Image::make($findimage)->resize(200, null, function ($constraint) {
+				$constraint->aspectRatio();
+			});
 
-        $slugname = $slug[0]->slug;
+			$imagemedium = Image::make($findimage)->resize(600, null, function ($constraint) {
+				$constraint->aspectRatio();
+			});
 
+			$imagethumb->save($pathThumb . $imageName);
+			$imagemedium->save($pathMedium . $imageName);
 
-        $input = $request->all();
-        $product = Product::FindOrFail($id);
+			$image = $request->imagethumb = $imageName;
+			$imagethumb = $request->image = $imageName;
+			$imagemedium = $request->image = $imageName;
 
-        $product->fill($input)->save();
+			$input['image'] = $image;
+			$input['imagemedium'] = $imagemedium;
+			$input['imagethumb'] = $imagethumb;
 
-        if ($request->hasFile('image')) {
+		}
 
-            $image = $request->file('image');
-            $path = public_path() . '/assets/img/products';
-            $pathThumb = public_path() . '/assets/img/products/thumbnails/';
-            $pathMedium = public_path() . '/assets/img/products/medium/';
-            $ext = $image->getClientOriginalExtension();
+		$product->fill($input)->save();
 
-            $imageName = $slugname . '.' . $ext;
+		Session::flash('flash_message', 'Product successfully edited!');
 
+		return redirect()->back();
+	}
 
-            $image->move($path, $imageName);
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy($id) {
+		$product = Product::FindOrFail($id);
 
-            $findimage = public_path() . '/assets/img/products/' . $imageName;
-            $imagethumb = Image::make($findimage)->resize(200, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+		// Delete blog images
+		$image = public_path() . '/assets/img/products/' . $product->image;
+		$imagemedium = public_path() . '/assets/img/products/medium/' . $product->image;
+		$imagethumb = public_path() . '/assets/img/products/thumbnails/' . $product->image;
 
-            $imagemedium = Image::make($findimage)->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+		unlink($image);
+		unlink($imagemedium);
+		unlink($imagethumb);
 
-            $imagethumb->save($pathThumb . $imageName);
-            $imagemedium->save($pathMedium . $imageName);
-
-            $image = $request->imagethumb = $imageName;
-            $imagethumb = $request->image = $imageName;
-            $imagemedium = $request->image = $imageName;
-
-
-            $input['image'] = $image;
-            $input['imagemedium'] = $imagemedium;
-            $input['imagethumb'] = $imagethumb;
-
-        }
-
-
-        $product->fill($input)->save();
-
-
-        Session::flash('flash_message', 'Product successfully edited!');
-
-        return redirect()->back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $product = Product::FindOrFail($id);
-
-        // Delete blog images
-        $image = public_path() . '/assets/img/products/' . $product->image;
-        $imagemedium = public_path() . '/assets/img/products/medium/' . $product->image;
-        $imagethumb = public_path() . '/assets/img/products/thumbnails/' . $product->image;
-
-        unlink($image);
-        unlink($imagemedium);
-        unlink($imagethumb);
-
-        $product->delete();
-        return redirect('/admin/product');
-    }
+		$product->delete();
+		return redirect('/admin/product');
+	}
 }

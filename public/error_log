@@ -1,0 +1,50 @@
+[09-May-2018 15:58:41 Europe/Skopje] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Pagination\AbstractPaginator::defaultView() in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php:2
+Stack trace:
+#0 /newhome/lxurkuov/public_html/papilon/public/index.php(35): require_once()
+#1 {main}
+  thrown in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php on line 2
+[09-May-2018 15:58:43 Europe/Skopje] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Pagination\AbstractPaginator::defaultView() in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php:2
+Stack trace:
+#0 /newhome/lxurkuov/public_html/papilon/public/index.php(35): require_once()
+#1 {main}
+  thrown in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php on line 2
+[09-May-2018 15:58:43 Europe/Skopje] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Pagination\AbstractPaginator::defaultView() in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php:2
+Stack trace:
+#0 /newhome/lxurkuov/public_html/papilon/public/index.php(35): require_once()
+#1 {main}
+  thrown in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php on line 2
+[09-May-2018 15:58:44 Europe/Skopje] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Pagination\AbstractPaginator::defaultView() in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php:2
+Stack trace:
+#0 /newhome/lxurkuov/public_html/papilon/public/index.php(35): require_once()
+#1 {main}
+  thrown in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php on line 2
+[09-May-2018 15:58:44 Europe/Skopje] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Pagination\AbstractPaginator::defaultView() in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php:2
+Stack trace:
+#0 /newhome/lxurkuov/public_html/papilon/public/index.php(35): require_once()
+#1 {main}
+  thrown in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php on line 2
+[09-May-2018 15:58:44 Europe/Skopje] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Pagination\AbstractPaginator::defaultView() in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php:2
+Stack trace:
+#0 /newhome/lxurkuov/public_html/papilon/public/index.php(35): require_once()
+#1 {main}
+  thrown in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php on line 2
+[09-May-2018 15:59:15 Europe/Skopje] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Pagination\AbstractPaginator::defaultView() in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php:17
+Stack trace:
+#0 /newhome/lxurkuov/public_html/papilon/public/index.php(35): require_once()
+#1 {main}
+  thrown in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php on line 17
+[09-May-2018 15:59:16 Europe/Skopje] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Pagination\AbstractPaginator::defaultView() in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php:17
+Stack trace:
+#0 /newhome/lxurkuov/public_html/papilon/public/index.php(35): require_once()
+#1 {main}
+  thrown in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php on line 17
+[09-May-2018 15:59:16 Europe/Skopje] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Pagination\AbstractPaginator::defaultView() in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php:17
+Stack trace:
+#0 /newhome/lxurkuov/public_html/papilon/public/index.php(35): require_once()
+#1 {main}
+  thrown in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php on line 17
+[09-May-2018 15:59:17 Europe/Skopje] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Pagination\AbstractPaginator::defaultView() in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php:17
+Stack trace:
+#0 /newhome/lxurkuov/public_html/papilon/public/index.php(35): require_once()
+#1 {main}
+  thrown in /newhome/lxurkuov/public_html/papilon/bootstrap/app.php on line 17
