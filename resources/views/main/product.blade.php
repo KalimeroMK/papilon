@@ -292,8 +292,40 @@
 
     <div class=" col-md-12 map">
         <div class="row">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2965.254666680804!2d21.42106381527165!3d41.99480977921301!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135415b58297c6e7%3A0x36f16034f112db39!2sPAPILLON+travel+agency!5e0!3m2!1sen!2smk!4v1525423797417"
-                    width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+            <style>
+                #map {
+                    height: 400px;
+                    width: 100%;
+                }
+            </style>
+
+            <div id="map"></div>
+        @section('scripts')
+            <!-- Google Maps -->
+                <script type="text/javascript"
+                        src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyA75bnzyJ_5j2Ger9Erjo1Q-0XucnZbst4"></script>
+                <script>
+
+                    $(document).ready(function () {
+// Google Maps
+
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: {lat: {{ $product->lat }}, lng: {{ $product->lng }} },
+                            zoom: 18,
+                            draggable: false
+                        });
+
+                        var marker = new google.maps.Marker({
+                            position: {lat: {{ $product->lat }}, lng: {{ $product->lng }} },
+                            map: map,
+                        });
+
+
+                    });
+                </script>
+            @endsection
+
         </div>
     </div>
 
@@ -335,33 +367,20 @@
             <div class="col-md-12">
                 <h2 class="my-3 section-title">Слични понуди</h2>
             </div>
-            <div class="col-md-4">
-                <div class="promo-offer">
-                    <div class="single-offer">
-                        <img src="images/promo1.jpg" class="img-fluid" alt=""/>
-                        <p>Концерти</p>
-                        <h3 class="entry-title"><a href="#">Andre Rieu</a></h3>
+            @foreach($similar as $similar)
+                <div class="col-md-4">
+                    <div class="promo-offer">
+                        <div class="single-offer">
+                            <img src="/assets/img/products/{{ $product->image }}" class="img-fluid"
+                                 alt="{{ $similar->image }}"/>
+                            <p>{{ $similar->category }}</p>
+                            <h3 class="entry-title"><a href="/categories/{{ $similar->slug }}">{{ $similar->title }}</a>
+                            </h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="promo-offer">
-                    <div class="single-offer">
-                        <img src="images/promo2.jpg" class="img-fluid" alt=""/>
-                        <p>Америка Work & Travel</p>
-                        <h3 class="entry-title"><a href="#">Авио билети за Amerika & TraveL</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="promo-offer">
-                    <div class="single-offer">
-                        <img src="images/promo3.jpg" class="img-fluid" alt=""/>
-                        <p>Грција</p>
-                        <h3 class="entry-title"><a href="#">Свети Влас</a></h3>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </div>
     <!-- Related offers end -->

@@ -62,6 +62,10 @@
     <!-- Bootstrap core JavaScript -->
     <script src="/frontend/js/jquery.min.js"></script>
     <script src="/frontend/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+            crossorigin="anonymous"></script>
+    <script src="/frontend/js/meni.js"></script>
     <!-- jQuery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/frontend/js/libs/jquery-1.7.min.js">\x3C/script>')</script>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Slider;
 use App\Sliders;
+use Illuminate\Pagination\Paginator as Paginator;
 use Illuminate\Http\Request;
 use App\Product as Product;
 use App\Category as Category;
@@ -26,7 +27,7 @@ class HomePageController extends Controller
         $slides = Slider::all();
         $referrals = Refferal::all();
         $categories = Category::roots()->get();
-        $products = Product::all();
+        $products = Product::all()->take(7);
         $tree = Category::getTreeHP($categories);
         $allcategories = DB::table('product')->join('categories', 'product.category', '=', 'categories.id')->groupBy('categories.id')->take(8)->get();
         $data = ["referrals" => $referrals, "settings" => $settings, "slides" => $slides, "services" => $services, "staticpages" => $staticpages, "allcategories" => $allcategories, "status" => "success", "products" => $products, "categories" => $categories, "tree" => $tree];
@@ -63,6 +64,8 @@ class HomePageController extends Controller
 
     public function product($slug)
     {
+
+        $similar = DB::table('product')->join('categories', 'product.category', '=', 'categories.id')->take(3)->get();
         $settings = Settings::firstOrFail();
         $services = Services::all();
         $product = Product::where('slug', '=', $slug)->first();
@@ -71,7 +74,7 @@ class HomePageController extends Controller
         $categories = Category::roots()->get();
         $tree = Category::getTreeHP($categories);
         $staticpages = StaticPage::all();
-        $data = ["sliders" => $sliders, "product" => $product, "services" => $services, "staticpages" => $staticpages, "settings" => $settings, "tree" => $tree, "categories" => $categories, "allcategories" => $allcategories];
+        $data = ["sliders" => $sliders, "product" => $product, "services" => $services, "staticpages" => $staticpages, "settings" => $settings, "tree" => $tree, "categories" => $categories, "allcategories" => $allcategories, "similar" => $similar];
         return view('main.product')->with($data);
     }
 
@@ -111,6 +114,8 @@ class HomePageController extends Controller
 
         if ($slug == "all") {
             $products = Product::all();
+
+
             $allcategories = Category::get();
             $categories = Category::roots()->get();
             $tree = Category::getTreeHP($categories);
@@ -121,7 +126,6 @@ class HomePageController extends Controller
             $category = Category::where('slug', '=', $slug)->first();
             $products = Product::where('category', '=', $category->id)->get();
         }
-
         $sliders = Sliders::where('category_id', '=', $category->id)->get();
         $allcategories = Category::get();
         $categories = Category::roots()->get();

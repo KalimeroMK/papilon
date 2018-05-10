@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e45d10ca-1646-4745-aebb-7fbfd862b0f0" name="папилон" url="http://digitalpresent.mk">
+        <fileTransfer host="digitalpresent.mk" port="21" rootFolder="/public_html/papilon">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

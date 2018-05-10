@@ -45,25 +45,37 @@ class Category extends \Baum\Node
 
     public static function getTreeHP($categories)
     {
-        $lists = '';
+        $lists = '<li class="dropdown">';
         foreach ($categories as $category)
             $lists .= self::renderNodeHP($category);
-        $lists .= "";
+        $lists .= "</li>";
         return $lists;
     }
 
-
     public static function renderNodeHP($node)
     {
-        $list = '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="/categories/' . $node->slug . '">' . $node->name . '</a>';
+        $list = '<li><a href="/categories/' . $node->slug . '">' . $node->name . '</a>';
         if ($node->children()->count() > 0) {
-            $list .= '<ul class="dropdown-menu">';
+            $list .= '<ul>';
             foreach ($node->children as $child)
                 $list .= self::renderNodeHP($child);
             $list .= "</ul>";
         }
 
-        $list .= "</li>";
+        $list .= "</a></li>";
         return $list;
     }
+//    public static function renderNodeHP($node)
+//    {
+//        $list = '<li class="dropdown"><a class="dropdown-toggle" href="/categories/' . $node->slug . '">' . $node->name . '</a>';
+//        if ($node->children()->count() > 0) {
+//            $list .= '<ul class="dropdown-menu">';
+//            foreach ($node->children as $child)
+//                $list .= self::renderNodeHP($child);
+//            $list .= "</ul>";
+//        }
+//
+//        $list .= "</li>";
+//        return $list;
+//    }
 }

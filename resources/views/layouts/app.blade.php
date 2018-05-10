@@ -268,8 +268,6 @@
         <script src="/assets/js/jquery.min.js"></script>
         <script src="/assets/js/bootstrap.min.js"></script>
         <script src="/assets/js/slimscroll/jquery.slimscroll.min.js"></script>
-
-
         <script type="text/javascript" src="/assets/js/ckeditor/ckeditor.js"></script>
     {{--<script type="text/javascript" src="/assets/js/ckconf.js"></script>--}}
 
