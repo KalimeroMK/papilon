@@ -1,9 +1,7 @@
 @section('menu')
     <!-- header start -->
-
-
     <nav class="navbar navbar-expand-md navbar-light bg-light btco-hover-menu">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">Navbar</a>
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">

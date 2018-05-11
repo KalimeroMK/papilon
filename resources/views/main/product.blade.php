@@ -1,4 +1,23 @@
 @extends('layouts.main')
+<!-- Schema.org markup for Google+ -->
+<meta itemprop="name" content="{{$product->title}}">
+<meta itemprop="description" content="{!! str_limit(strip_tags($product->description), 300, '...')!!}">
+<meta itemprop="image" content="{{$product->image}}">
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="{{$product->image}}">
+<meta name="twitter:site" content="@zaebalovek">
+<meta name="twitter:title" content="{{$product->title}}">
+<meta name="twitter:description" content="{!! str_limit(strip_tags($product->description), 300, '...')!!}">
+<meta name="twitter:creator" content="@zaebalovek">
+<meta name="twitter:image" content="{{$product->image}}">
+<!-- Open Graph data -->
+<meta property="og:locale" content="en_US"/>
+<meta property="og:title" content="{{$product->title}}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="{{$product->slag}}"/>
+<meta property="og:image" content="{{$product->image}}"/>
+<meta property="og:description" content="{!! str_limit(strip_tags($product->description), 300, '...')!!}"/>
+<meta property="og:site_name" content="{{$product->title}}"/>
 @include('layouts.menu')
 @section('content')
     <section> <!-- Main slider -->
@@ -328,7 +347,6 @@
 
         </div>
     </div>
-
 
     <!-- PRICE LIST MODAL BOX -->
     <!-- The Modal -->

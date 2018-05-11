@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<!--[if IE 9]>
-<html lang="en"> <![endif]-->
-<!--[if !IE]><!-->
 <html lang="en">
 <!--<![endif]-->
 <head>
@@ -9,10 +6,15 @@
     <title>{{$settings->title}}</title>
     <meta name="description" content="{!! str_limit(strip_tags($settings->description), 100, '...')!!}">
     <meta name="author" content="Zoran Shefot Bogoevski">
+    <meta name="keywords"
+          content="туристичка-агенција, агенција, патување, туризам, странство, аранжмани, аранжман, тура, грција, бугарија, турција, банско, халкидики, крф, лето, зима, летување, зимување, касандра, tourism, tourists, tour-operator, оператор, папилон, papillon-com-mk, papillon, скопје"/>
+    <meta name="news_keywords"
+          content="туристичка-агенција, агенција, патување, туризам, странство, аранжмани, аранжман, тура, грција, бугарија, турција, банско, халкидики, крф, лето, зима, летување, зимување, касандра, tourism, tourists, tour-operator, оператор"/>
     <!-- Mobile Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/frontend/images/favicon.ico">
+    <link rel="shortcut icon" href="/frontend/images/favicon.png">
     <!-- Bootstrap core CSS -->
     <link href="/frontend/css/bootstrap.min.css" rel="stylesheet">
     <link href="/frontend/css/main.css" rel="stylesheet">
@@ -50,13 +52,10 @@
                 </div>
                 <div class="col-md-12 copyright">
                     <p class="font-size-small">&copy;<a href="{{$settings->mainurl}}">{{$settings->title}}</a></p>
-
                 </div>
         </footer>
         <!-- Footer end -->
     </div>
-
-
     <!-- JavaScript files placed at the end of the document so the pages load faster -->
     <!-- ================================================== -->
     <!-- Bootstrap core JavaScript -->
@@ -69,15 +68,10 @@
     <!-- jQuery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/frontend/js/libs/jquery-1.7.min.js">\x3C/script>')</script>
-
-
     <!-- Implementing Flexslider -->
-
     <!-- FlexSlider -->
     <script defer src="/frontend/js/jquery.flexslider.js"></script>
-
     <script type="text/javascript">
-
         $(window).load(function () {
             $('.flexslider').flexslider({
                 animation: "slide",

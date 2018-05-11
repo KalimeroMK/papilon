@@ -27,10 +27,19 @@ class HomePageController extends Controller
         $slides = Slider::all();
         $referrals = Refferal::all();
         $categories = Category::roots()->get();
-        $products = Product::all()->take(7);
+        $products = Product::all();
+        $products1 = Product::where('recomend', 'yes')->limit(3)->get();
+        $products2 = Product::all()->random(1);
+        $products3 = Product::all()->random(1);
+        $products4 = Product::all()->random(1);
+        $products5 = Product::all()->random(1);
+        $products6 = Product::all()->random(1);
+        $products7 = Product::all()->random(1);
+        $products8 = Product::all()->random(1);
         $tree = Category::getTreeHP($categories);
         $allcategories = DB::table('product')->join('categories', 'product.category', '=', 'categories.id')->groupBy('categories.id')->take(8)->get();
-        $data = ["referrals" => $referrals, "settings" => $settings, "slides" => $slides, "services" => $services, "staticpages" => $staticpages, "allcategories" => $allcategories, "status" => "success", "products" => $products, "categories" => $categories, "tree" => $tree];
+        $data = ["referrals" => $referrals, "settings" => $settings, "slides" => $slides, "services" => $services, "staticpages" => $staticpages, "allcategories" => $allcategories, "status" => "success", "products" => $products, "categories" => $categories, "tree" => $tree, "products1" => $products1, "products2" => $products2, "products3" => $products3, "products4" => $products4, "products5" => $products5, "products6" => $products6, "products7" => $products7, "products8" => $products8];
+//        dd($products1);
         return view('main.homepage')->with($data);
     }
 

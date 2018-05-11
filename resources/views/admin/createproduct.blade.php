@@ -82,6 +82,15 @@
                         </div>
                         @if ($errors->has('taksa')) <p
                                 class="alert alert-danger">{{ $errors->first('taksa') }}</p> @endif
+                        <div class="form-group">
+                            <label for="category">Препорачуваме</label>
+                            <select name="recomend" id="recomend" class="form-control">
+                                <option value="yes">Прикажи</option>
+                                <option value="no">не прикажувај</option>
+                            </select>
+                        </div>
+                        @if ($errors->has('recomend')) <p
+                                class="alert alert-danger">{{ $errors->first('recomend') }}</p> @endif
                         <br>
                         <div class="form-group">
                             <input type="text" id="searchmap" class="form-control">

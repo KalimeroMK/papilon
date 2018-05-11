@@ -150,14 +150,21 @@
                             <textarea class="ckeditor" id="price"
                                       name="price">{{ $product->price }}</textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="category">Препорачуваме</label>
+                            <select name="recomend" id="recomend" class="form-control"
+                                    placeholder="{{ $product->recomend }}">
+                                <option value="yes">Прикажи</option>
+                                <option value="no">не прикажувај</option>
+                            </select>
+                        </div>
+                        @if ($errors->has('recomend')) <p
+                                class="alert alert-danger">{{ $errors->first('recomend') }}</p> @endif
                         <br>
                         <div class="form-group">
                             <input type="text" id="searchmap" class="form-control">
                             <div id="map-canvas"></div>
                         </div>
-
-                        @if ($errors->has('price')) <p
-                                class="alert alert-danger">{{ $errors->first('price') }}</p> @endif
 
                         <div class="form-group">
                             <label for="user">Author</label>

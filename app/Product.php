@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = 'product';
-    protected $fillable = ['title', 'slug', 'image', 'imagemedium', 'imagethumb', 'hotelinfo', 'roominfo', 'location', 'category', 'price', 'description', 'user_id', 'workflow_id', 'taksa', 'lat', 'lng', 'created_at', 'updated_at'];
+    protected $fillable = ['title', 'slug', 'image', 'imagemedium', 'imagethumb', 'hotelinfo', 'roominfo', 'location', 'category', 'price', 'description', 'user_id', 'workflow_id', 'taksa', 'lat', 'lng', 'recomend', 'created_at', 'updated_at'];
 
 
     public function cat()
