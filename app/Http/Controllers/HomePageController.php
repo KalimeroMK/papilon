@@ -78,12 +78,13 @@ class HomePageController extends Controller
         $settings = Settings::firstOrFail();
         $services = Services::all();
         $product = Product::where('slug', '=', $slug)->first();
+        $product1 = Product::all()->random(3);
         $sliders = Sliders::where('product_id', '=', $product->id)->get();
         $allcategories = Category::get();
         $categories = Category::roots()->get();
         $tree = Category::getTreeHP($categories);
         $staticpages = StaticPage::all();
-        $data = ["sliders" => $sliders, "product" => $product, "services" => $services, "staticpages" => $staticpages, "settings" => $settings, "tree" => $tree, "categories" => $categories, "allcategories" => $allcategories, "similar" => $similar];
+        $data = ["sliders" => $sliders, "product" => $product, "product1" => $product1, "services" => $services, "staticpages" => $staticpages, "settings" => $settings, "tree" => $tree, "categories" => $categories, "allcategories" => $allcategories, "similar" => $similar];
         return view('main.product')->with($data);
     }
 

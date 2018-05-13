@@ -58,6 +58,7 @@
                             <div class="single-offer">
                                 <img src="/assets/img/products/medium/{{ $products1->imagethumb }}" class="img-fluid"
                                      alt="{{ $products1->title }}"/>
+                                <p>{{$products1->cat->name}}</p>
                                 <h3 class="entry-title"><a
                                             href="/product/{{ $products1->slug }}">{{ $products1->title }}</a></h3>
                             </div>
@@ -116,6 +117,8 @@
                                         <img src="/assets/img/products/medium/{{ $products2->imagethumb }}"
                                              class="img-fluid"
                                              alt="{{ $products2->title }}"/>
+                                        <p>{{$products2->cat->name}}</p>
+
                                         <h3 class="entry-title"><a
                                                     href="/product/{{ $products2->slug }}">{{ $products2->title }}</a>
                                         </h3>
@@ -131,8 +134,9 @@
                                     @foreach($products3 as $products3)
                                         <div class="single-offer">
                                             <img src="/assets/img/products/medium/{{ $products3->imagethumb }}"
-                                                 class="img-fluid"
-                                                 alt="{{ $products3->title }}"/>
+                                                 class="img-fluid" alt="{{ $products3->title }}"/>
+                                            <p>{{$products3->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products3->slug }}">{{ $products3->title }}</a>
                                             </h3>
@@ -145,8 +149,9 @@
                                     @foreach($products4 as $products4)
                                         <div class="single-offer">
                                             <img src="/assets/img/products/medium/{{ $products4->imagethumb }}"
-                                                 class="img-fluid"
-                                                 alt="{{ $products4->title }}"/>
+                                                 class="img-fluid" alt="{{ $products4->title }}"/>
+                                            <p>{{$products4->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products4->slug }}">{{ $products4->title }}</a>
                                             </h3>
@@ -161,6 +166,8 @@
                                             <img src="/assets/img/products/{{ $products5->imagethumb }}"
                                                  class="img-fluid"
                                                  alt="{{ $products5->title }}"/>
+                                            <p>{{$products5->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products5->slug }}">{{ $products5->title }}</a>
                                             </h3>
@@ -173,12 +180,14 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="masonry-offer vertical-masonry">
+                                <div class="masonry-offer vertical-masonry vertikal">
                                     @foreach($products6 as $products6)
                                         <div class="single-offer">
                                             <img src="/assets/img/products/{{ $products6->imagethumb }}"
-                                                 class="img-fluid-h"
+                                                 class="img-fluid"
                                                  alt="{{ $products6->title }}"/>
+                                            <p>{{$products6->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products6->slug }}">{{ $products6->title }}</a>
                                             </h3>
@@ -193,6 +202,8 @@
                                             <img src="/assets/img/products/{{ $products7->imagethumb }}"
                                                  class="img-fluid"
                                                  alt="{{ $products7->title }}"/>
+                                            <p>{{$products7->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products7->slug }}">{{ $products7->title }}</a>
                                             </h3>
@@ -201,12 +212,14 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="masonry-offer vertical-masonry  ">
+                                <div class="masonry-offer vertical-masonry vertikal">
                                     @foreach($products8 as $products8)
                                         <div class="single-offer">
                                             <img src="/assets/img/products/{{ $products8->imagethumb }}"
-                                                 class="img-fluid-h"
+                                                 class="img-fluid"
                                                  alt="{{ $products8->title }}"/>
+                                            <p>{{$products8->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products8->slug }}">{{ $products8->title }}</a>
                                             </h3>

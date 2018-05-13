@@ -385,14 +385,14 @@
             <div class="col-md-12">
                 <h2 class="my-3 section-title">Слични понуди</h2>
             </div>
-            @foreach($similar as $similar)
+            @foreach($product1 as $product1)
                 <div class="col-md-4">
                     <div class="promo-offer">
                         <div class="single-offer">
-                            <img src="/assets/img/products/{{ $product->image }}" class="img-fluid"
-                                 alt="{{ $similar->image }}"/>
-                            <p>{{ $similar->category }}</p>
-                            <h3 class="entry-title"><a href="/categories/{{ $similar->slug }}">{{ $similar->title }}</a>
+                            <img src="/assets/img/products/medium/{{ $product1->image }}" class="img-fluid"
+                                 alt="{{ $product1->title }}"/>
+                            <p>{{$product1->cat->name}}</p>
+                            <h3 class="entry-title"><a href="/product/{{$product1->slug }}">{{ $product1->title }}</a>
                             </h3>
                         </div>
                     </div>
