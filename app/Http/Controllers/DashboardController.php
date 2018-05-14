@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\User as User;
 use Validator;
 use DB;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\ImageManagerStatic as Image;
 use Session;
 use Hash;
 use Input;
-use App\Country as Country;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class DashboardController extends Controller
 {
 
-    use AuthenticatesAndRegistersUsers;
+    use RegistersUsers;
 
     /**
      * Create a new controller instance.
