@@ -273,3 +273,7 @@ html[xmlns] .flexslider .slides {
     right: 10px;
   }
 }
+
+#newest-offers .masonry-offer.small-horizontal .single-offer {
+    height: 256px;
+}
