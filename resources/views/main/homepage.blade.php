@@ -23,8 +23,8 @@
     <section> <!--main slider start-->
         <div id="frontpage-slider">
             <div class="flexslider">
-                @foreach($slides as $slide)
-                    <ul class="slides">
+                <ul class="slides">
+                    @foreach($slides as $slide)
                         <li class="slide has-gradient"
                             style="background-image:url('/assets/img/slider/{{ $slide->image }}');">
                             <div class="container d-flex align-items-center justify-content-center">
@@ -37,14 +37,39 @@
                                 </div>
                             </div>
                         </li>
-                    </ul>
-                @endforeach
+                    @endforeach
+                </ul>
             </div>
         </div>
     </section> <!-- Main slider end-->
 @endsection
 @section('content')
-    <!-- section start -->
+    <div class=" py-5" id="frontpage-search-filter">
+        <div class="container">
+            <div class="col-md-12">
+                <h2 class="text-white">Хотелски аранжмани</h2>
+            </div>
+            <div class="col-md-12">
+                <form class="row">
+                    <div class="form-group mb-0  px-3 col-md-5">
+                        <label for="destination">Дестинација, Хотел</label>
+                        <select class="form-control" id="destination">
+                            <option disabled selected>Дестинација, Хотел</option>
+                            <option>2</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-0  px-3 col-md-3">
+                        <label for="date">Датум</label>
+                        <input type="date" name="date" id="date" max="3000-12-31"
+                               min="1000-01-01" class="form-control">
+                    </div>
+                    <div class="col-md-3 d-flex align-items-center">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>Пребарај</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> <!-- section start -->
 
     <section><!-- Promo offers start -->
         <div id="promo-offers" class="container my-4 py-4">
@@ -58,6 +83,7 @@
                             <div class="single-offer">
                                 <img src="/assets/img/products/medium/{{ $products1->imagethumb }}" class="img-fluid"
                                      alt="{{ $products1->title }}"/>
+                                <p>{{$products1->cat->name}}</p>
                                 <h3 class="entry-title"><a
                                             href="/product/{{ $products1->slug }}">{{ $products1->title }}</a></h3>
                             </div>
@@ -116,6 +142,8 @@
                                         <img src="/assets/img/products/medium/{{ $products2->imagethumb }}"
                                              class="img-fluid"
                                              alt="{{ $products2->title }}"/>
+                                        <p>{{$products2->cat->name}}</p>
+
                                         <h3 class="entry-title"><a
                                                     href="/product/{{ $products2->slug }}">{{ $products2->title }}</a>
                                         </h3>
@@ -131,8 +159,9 @@
                                     @foreach($products3 as $products3)
                                         <div class="single-offer">
                                             <img src="/assets/img/products/medium/{{ $products3->imagethumb }}"
-                                                 class="img-fluid"
-                                                 alt="{{ $products3->title }}"/>
+                                                 class="img-fluid" alt="{{ $products3->title }}"/>
+                                            <p>{{$products3->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products3->slug }}">{{ $products3->title }}</a>
                                             </h3>
@@ -145,8 +174,9 @@
                                     @foreach($products4 as $products4)
                                         <div class="single-offer">
                                             <img src="/assets/img/products/medium/{{ $products4->imagethumb }}"
-                                                 class="img-fluid"
-                                                 alt="{{ $products4->title }}"/>
+                                                 class="img-fluid" alt="{{ $products4->title }}"/>
+                                            <p>{{$products4->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products4->slug }}">{{ $products4->title }}</a>
                                             </h3>
@@ -161,6 +191,8 @@
                                             <img src="/assets/img/products/{{ $products5->imagethumb }}"
                                                  class="img-fluid"
                                                  alt="{{ $products5->title }}"/>
+                                            <p>{{$products5->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products5->slug }}">{{ $products5->title }}</a>
                                             </h3>
@@ -173,12 +205,14 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="masonry-offer vertical-masonry">
+                                <div class="masonry-offer vertical-masonry vertikal">
                                     @foreach($products6 as $products6)
                                         <div class="single-offer">
                                             <img src="/assets/img/products/{{ $products6->imagethumb }}"
-                                                 class="img-fluid-h"
+                                                 class="img-fluid"
                                                  alt="{{ $products6->title }}"/>
+                                            <p>{{$products6->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products6->slug }}">{{ $products6->title }}</a>
                                             </h3>
@@ -193,6 +227,8 @@
                                             <img src="/assets/img/products/{{ $products7->imagethumb }}"
                                                  class="img-fluid"
                                                  alt="{{ $products7->title }}"/>
+                                            <p>{{$products7->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products7->slug }}">{{ $products7->title }}</a>
                                             </h3>
@@ -201,12 +237,14 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="masonry-offer vertical-masonry  ">
+                                <div class="masonry-offer vertical-masonry vertikal">
                                     @foreach($products8 as $products8)
                                         <div class="single-offer">
                                             <img src="/assets/img/products/{{ $products8->imagethumb }}"
-                                                 class="img-fluid-h"
+                                                 class="img-fluid"
                                                  alt="{{ $products8->title }}"/>
+                                            <p>{{$products8->cat->name}}</p>
+
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products8->slug }}">{{ $products8->title }}</a>
                                             </h3>

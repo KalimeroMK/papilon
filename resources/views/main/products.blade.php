@@ -12,22 +12,27 @@
             <div class="gallery-grids">
                 @foreach($products as $product)
                     <div class="col-md-4 gallery-grid wow fadeInLeft animated" data-wow-delay=".5s">
-                        <div class="grid">
-                            <figure class="effect-roxy">
-                                <a class="example-image-link" href="/product/{{ $product->slug }}" data-lightbox="example-set" data-title="">
-                                    <img src="/assets/img/products/{{ $product->image }}" alt="" />
-                                    <figcaption>
-                                        <h3>{!! $product->title !!}> </h3>
-                                        <p> {!!  str_limit($product->description, 100) !!} </p>
-                                    </figcaption>
-                                </a>
-                            </figure>
-                        </div>
-                    </div>
-                @endforeach
+                        <divUndefined variable: product1 (View:
+                        /newhome/lxurkuov/public_html/papilon/resources/views/main/product.blade.php)
 
+                        class="grid">
+                        <figure class="effect-roxy">
+                            <a class="example-image-link" href="/product/{{ $product->slug }}"
+                               data-lightbox="example-set" data-title="">
+                                <img src="/assets/img/products/{{ $product->image }}"
+                                     alt="{!! $product->title !!}"/>
+                                <figcaption>
+                                    <h3>{!! $product->title !!} </h3>
+                                    <p> {!!  str_limit($product->description, 100) !!} </p>
+                                </figcaption>
+                            </a>
+                        </figure>
+                    </div>
             </div>
+            @endforeach
+
         </div>
-        <!-- //gallery -->
+    </div>
+    <!-- //gallery -->
     @include('main.footer')
 @endsection

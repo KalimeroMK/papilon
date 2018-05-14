@@ -9,10 +9,10 @@
                     <div class="col-md-5">
                         <h1 class="category-title fancy-big-text">{!! $category->name !!}</h1>
                     </div>
-                    <div class="col-md-7">
-                        <p class="category-desc">
-                            {!! $category->description !!}
-                        </p>
+                    <div class="col-md-7 category-desc">
+
+                        {!! $category->description !!}
+
                     </div>
                 </div>
             </div>
@@ -26,9 +26,9 @@
                     <div class="col-md-4">
                         <div class="promo-offer">
                             <div class="single-offer">
-                                <img src="/assets/img/products/{{ $product->image }}" class="img-fluid"
+                                <img src="/assets/img/products/medium/{{ $product->image }}" class="img-fluid"
                                      alt="{{ $product->title }}">
-                                <p>Концерти</p>
+                                <p>{{$product->cat->name}}</p>
                                 <h3 class="entry-title"><a
                                             href="/product/{{ $product->slug }}">{{ $product->title }}</a>
                                 </h3>
@@ -37,6 +37,9 @@
                     </div>
                 @endforeach
             </div>
+            {{ $products->links() }}
+
+
         </div>
     </section><!--categori post list section end-->
 

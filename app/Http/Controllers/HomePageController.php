@@ -27,15 +27,15 @@ class HomePageController extends Controller
         $slides = Slider::all();
         $referrals = Refferal::all();
         $categories = Category::roots()->get();
-        $products = Product::all();
-        $products1 = Product::where('recomend', 'yes')->limit(3)->get();
-        $products2 = Product::all()->random(1);
-        $products3 = Product::all()->random(1);
-        $products4 = Product::all()->random(1);
-        $products5 = Product::all()->random(1);
-        $products6 = Product::all()->random(1);
-        $products7 = Product::all()->random(1);
-        $products8 = Product::all()->random(1);
+        $products = Product::all()->where('workflow_id', '=', '1');
+        $products1 = Product::where('recomend', 'yes')->limit(3)->where('workflow_id', '=', '1')->get();
+        $products2 = Product::all()->random(1)->where('workflow_id', '=', '1');
+        $products3 = Product::all()->random(1)->where('workflow_id', '=', '1');
+        $products4 = Product::all()->random(1)->where('workflow_id', '=', '1');
+        $products5 = Product::all()->random(1)->where('workflow_id', '=', '1');
+        $products6 = Product::all()->random(1)->where('workflow_id', '=', '1');
+        $products7 = Product::all()->random(1)->where('workflow_id', '=', '1');
+        $products8 = Product::all()->random(1)->where('workflow_id', '=', '1');
         $tree = Category::getTreeHP($categories);
         $allcategories = DB::table('product')->join('categories', 'product.category', '=', 'categories.id')->groupBy('categories.id')->take(8)->get();
         $data = ["referrals" => $referrals, "settings" => $settings, "slides" => $slides, "services" => $services, "staticpages" => $staticpages, "allcategories" => $allcategories, "status" => "success", "products" => $products, "categories" => $categories, "tree" => $tree, "products1" => $products1, "products2" => $products2, "products3" => $products3, "products4" => $products4, "products5" => $products5, "products6" => $products6, "products7" => $products7, "products8" => $products8];
@@ -50,7 +50,7 @@ class HomePageController extends Controller
         $staticpage = StaticPage::where("slug", "=", $slug)->first();
         $staticpages = StaticPage::all();
         $categories = Category::roots()->get();
-        $products = Product::all();
+        $products = Product::all()->where('workflow_id', '=', '1');
         $tree = Category::getTreeHP($categories);
         $allcategories = Category::get();
         $data = ["settings" => $settings, "services" => $services, "staticpage" => $staticpage, "staticpages" => $staticpages, "allcategories" => $allcategories, "status" => "success", "products" => $products, "categories" => $categories, "tree" => $tree];
@@ -77,13 +77,14 @@ class HomePageController extends Controller
         $similar = DB::table('product')->join('categories', 'product.category', '=', 'categories.id')->take(3)->get();
         $settings = Settings::firstOrFail();
         $services = Services::all();
-        $product = Product::where('slug', '=', $slug)->first();
+        $product = Product::where('slug', '=', $slug)->first()->where('workflow_id', '=', '1');
+        $product1 = Product::all()->random(3)->where('workflow_id', '=', '1');
         $sliders = Sliders::where('product_id', '=', $product->id)->get();
         $allcategories = Category::get();
         $categories = Category::roots()->get();
         $tree = Category::getTreeHP($categories);
         $staticpages = StaticPage::all();
-        $data = ["sliders" => $sliders, "product" => $product, "services" => $services, "staticpages" => $staticpages, "settings" => $settings, "tree" => $tree, "categories" => $categories, "allcategories" => $allcategories, "similar" => $similar];
+        $data = ["sliders" => $sliders, "product" => $product, "product1" => $product1, "services" => $services, "staticpages" => $staticpages, "settings" => $settings, "tree" => $tree, "categories" => $categories, "allcategories" => $allcategories, "similar" => $similar];
         return view('main.product')->with($data);
     }
 
@@ -93,7 +94,7 @@ class HomePageController extends Controller
         $services = Services::all();
         $referral = Refferal::all();
         if ($slug == "all") {
-            $products = Product::all();
+            $products = Product::all()->where('workflow_id', '=', '1');
             $allcategories = Category::get();
             $categories = Category::roots()->get();
             $tree = Category::getTreeHP($categories);
@@ -122,7 +123,7 @@ class HomePageController extends Controller
         $services = Services::all();
 
         if ($slug == "all") {
-            $products = Product::all();
+            $products = Product::all()->where('workflow_id', '=', '1');
 
 
             $allcategories = Category::get();
@@ -133,7 +134,7 @@ class HomePageController extends Controller
             return view('main.allcategories')->with($data);
         } else {
             $category = Category::where('slug', '=', $slug)->first();
-            $products = Product::where('category', '=', $category->id)->get();
+            $products = Product::where('category', '=', $category->id)->paginate(12);
         }
         $sliders = Sliders::where('category_id', '=', $category->id)->get();
         $allcategories = Category::get();
