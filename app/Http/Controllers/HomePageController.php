@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Slider;
 use App\Sliders;
-use Illuminate\Pagination\Paginator as Paginator;
 use Illuminate\Http\Request;
 use App\Product as Product;
 use App\Category as Category;
@@ -74,17 +72,16 @@ class HomePageController extends Controller
     public function product($slug)
     {
 
-        $similar = DB::table('product')->join('categories', 'product.category', '=', 'categories.id')->take(3)->get();
         $settings = Settings::firstOrFail();
         $services = Services::all();
-        $product = Product::where('slug', '=', $slug)->first()->where('workflow_id', '=', '1');
+        $product = Product::where('slug', '=', $slug)->first();
         $product1 = Product::all()->random(3)->where('workflow_id', '=', '1');
         $sliders = Sliders::where('product_id', '=', $product->id)->get();
         $allcategories = Category::get();
         $categories = Category::roots()->get();
         $tree = Category::getTreeHP($categories);
         $staticpages = StaticPage::all();
-        $data = ["sliders" => $sliders, "product" => $product, "product1" => $product1, "services" => $services, "staticpages" => $staticpages, "settings" => $settings, "tree" => $tree, "categories" => $categories, "allcategories" => $allcategories, "similar" => $similar];
+        $data = ["sliders" => $sliders, "product" => $product, "product1" => $product1, "services" => $services, "staticpages" => $staticpages, "settings" => $settings, "tree" => $tree, "categories" => $categories, "allcategories" => $allcategories];
         return view('main.product')->with($data);
     }
 
@@ -144,5 +141,6 @@ class HomePageController extends Controller
         $data = ["category" => $category, "sliders" => $sliders, "products" => $products, "services" => $services, "staticpages" => $staticpages, "settings" => $settings, "tree" => $tree, "categories" => $categories, "allcategories" => $allcategories];
         return view('main.categories')->with($data);
     }
+
 
 }

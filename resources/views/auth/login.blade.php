@@ -6,7 +6,7 @@
         <div class="loginbox bg-white">
             <div class="logobox">
                 {{-- <img src="/assets/img/wc-logo.png" alt="Worldcrunch" class="img-responsive" /> --}}
-                <p>FrutiSmoothie Admin Panel </p>
+                <p>Papillon Admin Panel </p>
             </div>
             <div class="loginbox-title">SIGN IN</div>
             <div class="loginbox-or">

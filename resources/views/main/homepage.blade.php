@@ -44,33 +44,25 @@
     </section> <!-- Main slider end-->
 @endsection
 @section('content')
-    <div class=" py-5" id="frontpage-search-filter">
-        <div class="container">
-            <div class="col-md-12">
-                <h2 class="text-white">Хотелски аранжмани</h2>
-            </div>
-            <div class="col-md-12">
-                <form class="row">
-                    <div class="form-group mb-0  px-3 col-md-5">
-                        <label for="destination">Дестинација, Хотел</label>
-                        <select class="form-control" id="destination">
-                            <option disabled selected>Дестинација, Хотел</option>
-                            <option>2</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-0  px-3 col-md-3">
-                        <label for="date">Датум</label>
-                        <input type="date" name="date" id="date" max="3000-12-31"
-                               min="1000-01-01" class="form-control">
-                    </div>
-                    <div class="col-md-3 d-flex align-items-center">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>Пребарај</button>
-                    </div>
-                </form>
+    <section><!-- src box start -->
+        <div class=" py-5" id="frontpage-search-filter">
+            <div class="container">
+
+                <div class="col-md-12">
+                    <form class="row">
+
+                        <div class="form-group mb-0  px-3 col-md-3">
+                            <label for="text">Датум</label>
+                            <input type="text" name="text" id="txt" class="form-control">
+                        </div>
+                        <div class="col-md-3 d-flex align-items-center">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>Пребарај</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div> <!-- section start -->
-
+    </section><!-- src box end -->
     <section><!-- Promo offers start -->
         <div id="promo-offers" class="container my-4 py-4">
             <div class="row">
