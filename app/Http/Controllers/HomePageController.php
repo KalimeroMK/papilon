@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Slider;
 use App\Sliders;
+
 use Illuminate\Http\Request;
 use App\Product as Product;
 use App\Category as Category;
@@ -34,6 +35,7 @@ class HomePageController extends Controller
         $products6 = Product::all()->random(1)->where('workflow_id', '=', '1');
         $products7 = Product::all()->random(1)->where('workflow_id', '=', '1');
         $products8 = Product::all()->random(1)->where('workflow_id', '=', '1');
+
         $tree = Category::getTreeHP($categories);
         $allcategories = DB::table('product')->join('categories', 'product.category', '=', 'categories.id')->groupBy('categories.id')->take(8)->get();
         $data = ["referrals" => $referrals, "settings" => $settings, "slides" => $slides, "services" => $services, "staticpages" => $staticpages, "allcategories" => $allcategories, "status" => "success", "products" => $products, "categories" => $categories, "tree" => $tree, "products1" => $products1, "products2" => $products2, "products3" => $products3, "products4" => $products4, "products5" => $products5, "products6" => $products6, "products7" => $products7, "products8" => $products8];
@@ -140,6 +142,19 @@ class HomePageController extends Controller
         $staticpages = StaticPage::all();
         $data = ["category" => $category, "sliders" => $sliders, "products" => $products, "services" => $services, "staticpages" => $staticpages, "settings" => $settings, "tree" => $tree, "categories" => $categories, "allcategories" => $allcategories];
         return view('main.categories')->with($data);
+    }
+
+    public function search(Request $request)
+    {
+        $settings = Settings::firstOrFail();
+        $products = Product::where('title', 'like', '%' . $request->$search . '%')
+            ->where('description', 'like', '%' . $request->$search . '%')
+            ->where('workflow_id', '=', '1')
+            ->orderBy('id', 'desc')
+            ->paginate(20);
+
+        $data = ["products" => $products, "settings" => $settings];
+        return view('main.search')->with($data);
     }
 
 
