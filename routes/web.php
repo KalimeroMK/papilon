@@ -1,5 +1,7 @@
 <?php
 
+use App\Product as Product;
+
 Route::group(['prefix' => 'admin'], function () {
 
 });
@@ -94,3 +96,5 @@ Route::get('/referents/{slug}', 'HomePageController@referents');
 Route::get('/services/{slug}', 'HomePageController@services');
 Route::get('/product/{slug}', 'HomePageController@product');
 Route::get('/categories/{slug}', 'HomePageController@categories');
+Route::get('/search', 'HomePageController@search');
+

@@ -48,20 +48,20 @@
         <div class=" py-5" id="frontpage-search-filter">
             <div class="container">
 
-                <div class="col-md-12">
-                    <form class="row">
+                <div class="search-box over-header">
+                    <a id="closeSearch" href="#" class="glyphicon glyphicon-remove"></a>
 
-                        <div class="form-group mb-0  px-3 col-md-3">
-                            <label for="text">Датум</label>
-                            <input type="text" name="text" id="txt" class="form-control">
-                        </div>
-                        <div class="col-md-3 d-flex align-items-center">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>Пребарај</button>
-                        </div>
+                    <form action="{{ url('/search') }}" method="post">
+                        {!! csrf_field() !!}
+                        <input type="text" class="form-control" name="search" placeholder="SEARCH"/>
+                    </form>
+                </div>
+            </div>
                     </form>
                 </div>
             </div>
         </div>
+
     </section><!-- src box end -->
     <section><!-- Promo offers start -->
         <div id="promo-offers" class="container my-4 py-4">
