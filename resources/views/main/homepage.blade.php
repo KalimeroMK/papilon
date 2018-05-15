@@ -49,7 +49,7 @@
             <div class="container">
 
                 <div class="search-box over-header">
-                    <a id="closeSearch" href="#" class="glyphicon glyphicon-remove"></a>
+                    <a id="Search" href="#" class="glyphicon glyphicon-remove"></a>
 
                     <form action="{{ url('/search') }}" method="post">
                         {!! csrf_field() !!}
@@ -57,10 +57,9 @@
                     </form>
                 </div>
             </div>
-                    </form>
-                </div>
-            </div>
+
         </div>
+
 
     </section><!-- src box end -->
     <section><!-- Promo offers start -->
@@ -73,9 +72,10 @@
                     <div class="col-md-4">
                         <div class="promo-offer">
                             <div class="single-offer">
-                                <img src="/assets/img/products/medium/{{ $products1->imagethumb }}" class="img-fluid"
-                                     alt="{{ $products1->title }}"/>
-                                <p>{{$products1->cat->name}}</p>
+                                <a href="/product/{{ $products1->slug }}"><img
+                                            src="/assets/img/products/medium/{{ $products1->imagethumb }}"
+                                            class="img-fluid" alt="{{ $products1->title }}"/></a>
+                                <a href="/categories/{{$products1->cat->slug}}"><p>{{$products1->cat->name}}</p></a>
                                 <h3 class="entry-title"><a
                                             href="/product/{{ $products1->slug }}">{{ $products1->title }}</a></h3>
                             </div>
@@ -134,7 +134,8 @@
                                         <img src="/assets/img/products/medium/{{ $products2->imagethumb }}"
                                              class="img-fluid"
                                              alt="{{ $products2->title }}"/>
-                                        <p>{{$products2->cat->name}}</p>
+                                        <a href="/categories/{{$products2->cat->slug}}"><p>{{$products2->cat->name}}</p>
+                                        </a>
 
                                         <h3 class="entry-title"><a
                                                     href="/product/{{ $products2->slug }}">{{ $products2->title }}</a>
@@ -152,7 +153,8 @@
                                         <div class="single-offer">
                                             <img src="/assets/img/products/medium/{{ $products3->imagethumb }}"
                                                  class="img-fluid" alt="{{ $products3->title }}"/>
-                                            <p>{{$products3->cat->name}}</p>
+                                            <a href="/categories/{{$products3->cat->slug}}">
+                                                <p>{{$products3->cat->name}}</p></a>
 
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products3->slug }}">{{ $products3->title }}</a>
@@ -167,7 +169,8 @@
                                         <div class="single-offer">
                                             <img src="/assets/img/products/medium/{{ $products4->imagethumb }}"
                                                  class="img-fluid" alt="{{ $products4->title }}"/>
-                                            <p>{{$products4->cat->name}}</p>
+                                            <a href="/categories/{{$products4->cat->slug}}">
+                                                <p>{{$products4->cat->name}}</p></a>
 
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products4->slug }}">{{ $products4->title }}</a>
@@ -183,7 +186,8 @@
                                             <img src="/assets/img/products/{{ $products5->imagethumb }}"
                                                  class="img-fluid"
                                                  alt="{{ $products5->title }}"/>
-                                            <p>{{$products5->cat->name}}</p>
+                                            <a href="/categories/{{$products5->cat->slug}}">
+                                                <p>{{$products5->cat->name}}</p></a>
 
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products5->slug }}">{{ $products5->title }}</a>
@@ -203,7 +207,8 @@
                                             <img src="/assets/img/products/{{ $products6->imagethumb }}"
                                                  class="img-fluid"
                                                  alt="{{ $products6->title }}"/>
-                                            <p>{{$products6->cat->name}}</p>
+                                            <a href="/categories/{{$products6->cat->slug}}">
+                                                <p>{{$products6->cat->name}}</p></a>
 
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products6->slug }}">{{ $products6->title }}</a>
@@ -219,7 +224,8 @@
                                             <img src="/assets/img/products/{{ $products7->imagethumb }}"
                                                  class="img-fluid"
                                                  alt="{{ $products7->title }}"/>
-                                            <p>{{$products7->cat->name}}</p>
+                                            <a href="/categories/{{$products7->cat->slug}}">
+                                                <p>{{$products7->cat->name}}</p></a>
 
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products7->slug }}">{{ $products7->title }}</a>
@@ -235,7 +241,8 @@
                                             <img src="/assets/img/products/{{ $products8->imagethumb }}"
                                                  class="img-fluid"
                                                  alt="{{ $products8->title }}"/>
-                                            <p>{{$products8->cat->name}}</p>
+                                            <a href="/categories/{{$products8->cat->slug}}">
+                                                <p>{{$products8->cat->name}}</p></a>
 
                                             <h3 class="entry-title"><a
                                                         href="/product/{{ $products8->slug }}">{{ $products8->title }}</a>

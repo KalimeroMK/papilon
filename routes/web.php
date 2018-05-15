@@ -96,5 +96,5 @@ Route::get('/referents/{slug}', 'HomePageController@referents');
 Route::get('/services/{slug}', 'HomePageController@services');
 Route::get('/product/{slug}', 'HomePageController@product');
 Route::get('/categories/{slug}', 'HomePageController@categories');
-Route::get('/search', 'HomePageController@search');
+Route::post('/search', 'HomePageController@search');
 
