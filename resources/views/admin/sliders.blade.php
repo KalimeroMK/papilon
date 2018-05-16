@@ -1,17 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="page-body">
         <div class="row">
             <div class="col-lg-12">
                 <p><a class="btn btn-labeled shiny btn-warning btn-large" href="/admin/slider/create"> <i
-                                class="btn-label fa fa-plus"></i>Додади слика во слајдер </a></p>
+                                class="btn-label fa fa-plus"></i>Add Slider </a></p>
             </div>
+
             <div class="col-lg-12">
                 <div class="widget">
                     <div class="widget-header bordered-bottom bordered-themesecondary">
                         <i class="widget-icon fa fa-tags themesecondary"></i>
-                        <span class="widget-caption themesecondary">Слики</span>
+                        <span class="widget-caption themesecondary">Sliders</span>
                     </div><!--Widget Header-->
                     <div class="widget-body  no-padding">
                         <div class="tickets-container">
@@ -31,9 +33,15 @@
                                                     <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                                     <span class="time">Original creator: {{ $slider->createdby->name }}</span>
                                                 </div>
+                                                <div class="ticket-type  col-lg-3 col-sm-6 col-xs-12">
+                                                    <span class="divider hidden-xs"></span>
+                                                    <span class="type">Asigned for: {{ $slider->user->name }}</span>
+                                                </div>
 
-
-
+                                                <div class="ticket-type  col-lg-3 col-sm-6 col-xs-12">
+                                                    <span class="divider hidden-xs"></span>
+                                                    <span class="type">Workflow: {{ $slider->workflow->name }}</span>
+                                                </div>
                                                 <div class="ticket-state bg-palegreen">
                                                     <i class="glyphicon glyphicon-eye-open"></i>
                                                 </div>

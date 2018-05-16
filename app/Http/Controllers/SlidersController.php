@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
-use Illuminate\Http\Request;
+use App\Product as Product;
 use App\Sliders as Slider;
 use App\User as User;
-use App\Product as Product;
 use App\Workflow as Workflow;
-use Validator;
+use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
-use Input;
 use Session;
-use DB;
-
+use Validator;
 
 class SlidersController extends Controller
 {
@@ -22,14 +18,12 @@ class SlidersController extends Controller
     {
         $product = Product::FindOrFail($id);
         $users = User::all();
-        $sliders = Slider::where('product_id','=',$id)->get();
+        $sliders = Slider::where('product_id', '=', $id)->get();
         $workflows = Workflow::orderBy('id', 'desc')->get();
         $data = ['workflows' => $workflows, 'sliders' => $sliders, "users" => $users, "product" => $product];
 
         return view('admin.addsliders')->with($data);
     }
-
-
 
     public function store(Request $request)
     {
@@ -43,10 +37,7 @@ class SlidersController extends Controller
                 ->withInput();
         }
 
-
         $input = $request->all();
-
-
 
         if ($request->hasFile('image')) {
 
@@ -56,9 +47,7 @@ class SlidersController extends Controller
             $pathMedium = public_path() . '/assets/img/sliders/medium/';
             $ext = $image->getClientOriginalExtension();
 
-
-            $imageName =  rand(1003332,1003332443434) . '.' . strtolower($ext);
-
+            $imageName = rand(1003332, 1003332443434) . '.' . strtolower($ext);
 
             $image->move($path, $imageName);
 
@@ -84,7 +73,6 @@ class SlidersController extends Controller
 
         }
 
-
         Slider::create($input);
 
         Session::flash('flash_message', 'Slider image successfully created!');
@@ -92,11 +80,10 @@ class SlidersController extends Controller
         return redirect()->back();
     }
 
-
-
     public function destroy(Request $request)
     {
         $slider = Slider::FindOrFail($request['id']);
+
         // Delete blog images
         $image = public_path() . '/assets/img/sliders/' . $slider->image;
         $imagemedium = public_path() . '/assets/img/sliders/medium/' . $slider->image;
@@ -110,4 +97,3 @@ class SlidersController extends Controller
         return redirect()->back();
     }
 }
-

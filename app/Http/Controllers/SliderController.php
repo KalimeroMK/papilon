@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Category as Category;
+use App\Country as Country;
 use App\Slider as Slider;
 use App\User as User;
-use App\Country as Country;
 use App\Workflow as Workflow;
-use App\Category as Category;
-use Validator;
+use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
-use Input;
 use Session;
-use DB;
-
+use Validator;
 
 class SliderController extends Controller
 {
@@ -41,8 +36,8 @@ class SliderController extends Controller
     {
         $users = User::all();
         $countries = Country::orderBy('name', 'asc')->get();
-        $workflows = Workflow::orderBy('id','desc')->get();
-        $data = ['countries' => $countries,'users' => $users,'workflows' => $workflows];
+        $workflows = Workflow::orderBy('id', 'desc')->get();
+        $data = ['countries' => $countries, 'users' => $users, 'workflows' => $workflows];
         return view('admin.createslider')->with($data);
     }
 
@@ -66,18 +61,17 @@ class SliderController extends Controller
                 ->withInput();
         }
 
-
         $request['title'] = strip_tags($request['title']);
         $request['slug'] = str_slug($request['title']);
 
         $slug = Slider::where('title', $request['title'])->get();
         (int)$count = count($slug);
 
-        if ($count > 0) $request['slug'] = $request['slug'] . '-' . $count;
-
+        if ($count > 0) {
+            $request['slug'] = $request['slug'] . '-' . $count;
+        }
 
         $input = $request->all();
-
 
         if ($request->hasFile('image')) {
 
@@ -87,13 +81,11 @@ class SliderController extends Controller
             $pathMedium = public_path() . '/assets/img/slider/medium/';
             $ext = $image->getClientOriginalExtension();
 
-
             if ($count > 0) {
                 $imageName = str_slug($input['title']) . '-' . $count . '.' . $ext;
             } else {
                 $imageName = str_slug($input['title']) . '.' . $ext;
             }
-
 
             $image->move($path, $imageName);
 
@@ -115,11 +107,9 @@ class SliderController extends Controller
 
         }
 
-
         $input['image'] = $image;
         $input['imagemedium'] = $imagemedium;
         $input['imagethumb'] = $imagethumb;
-
 
         $slider = Slider::create($input);
 
@@ -175,7 +165,6 @@ class SliderController extends Controller
                 ->withInput();
         }
 
-
         $request['title'] = strip_tags($request['title']);
 
         $slugname = str_slug($request['title']);
@@ -195,7 +184,6 @@ class SliderController extends Controller
 
             $imageName = $slugname . '.' . $ext;
 
-
             $image->move($path, $imageName);
 
             $findimage = public_path() . '/assets/img/slider/' . $imageName;
@@ -207,7 +195,6 @@ class SliderController extends Controller
                 $constraint->aspectRatio();
             });
 
-
             $imagethumb->save($pathThumb . $imageName);
             $imagemedium->save($pathMedium . $imageName);
 
@@ -215,16 +202,13 @@ class SliderController extends Controller
             $imagethumb = $request->image = $imageName;
             $imagemedium = $request->image = $imageName;
 
-
             $input['image'] = $image;
             $input['imagemedium'] = $imagemedium;
             $input['imagethumb'] = $imagethumb;
 
         }
 
-
         $slider->fill($input)->save();
-
 
         Session::flash('flash_message', 'Slider successfully edited!');
 

@@ -26,7 +26,7 @@
                 <ul class="slides">
                     @foreach($sliders as $slider)
                         <li class="slide "
-                            style="background-image:url('/assets/img/sliders/medium/{{ $slider->image }}');"></li>
+                            style="background-image:url('/assets/img/sliders/{{ $slider->image }}');"></li>
                     @endforeach
                 </ul>
             </div>
