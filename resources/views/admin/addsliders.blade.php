@@ -14,7 +14,7 @@
 
                 <div class="widget">
                     <div class="widget-header bordered-bottom bordered-warning">
-                        <span class="widget-caption">Додади слика во слајдер</span>
+                        <span class="widget-caption">Book gallery</span>
                     </div>
                     <div class="widget-body">
                         <div id="horizontal-form">
@@ -26,8 +26,8 @@
                             <div class="input-group{{ $errors->has('image') ? ' has-error' : '' }}">
 							<span class="input-group-btn">
 								<span class="btn btn-info shiny btn-file">
-									<i class="btn-label fa fa-image"> </i> Избери слика... <input type="file"
-                                                                                                  name="image">
+									<i class="btn-label fa fa-image"> </i> Browse... <input type="file"
+                                                                                            name="image">
 								</span>
 							</span>
                                 <input type="text" class="form-control" readonly="">
@@ -38,7 +38,7 @@
 
 
                             <div class="form-group">
-                                <label for="user">Уредник</label>
+                                <label for="user">Editor</label>
                                 <select name="user_id" id="user" class="form-control">
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}"
@@ -67,9 +67,9 @@
                             <!-- Hidden inputs -->
 
                             <input type="hidden" name="creator" value="{{ Auth::user()->id  }}">
-                            <input type="hidden" id="product_id" class="form-control" name="product_id"
+                            <input type="hidden" name="title" value="{{ $product->title  }}">
+                            <input type="hidden" id="book_id" class="form-control" name="book_id"
                                    value="{{ $product->id  }}">
-
 
 
                             <button type="submit" class="btn btn-labeled shiny btn-warning btn-large"><i
@@ -88,11 +88,12 @@
             <div class="row">
                 <div class="col-lg-offset-1 col-sm-offset-1 col-lg-10 col-sm-12 col-xs-12">
                     @foreach($sliders as $slider)
-                        {{ Form::model('sliders', array('route' => array('admin.sliders.destroy'), 'method' => 'POST', 'files'=>true)) }}
+                        {{ Form::model('sliders', array('route' => array('admin.sliders.destroy' , $product->id), 'method' => 'POST', 'files'=>true)) }}
+
                         <div class="col-md-4">
                             <input type="hidden" id="id" class="form-control" name="id"
                                    value="{{ $slider->id  }}">
-                            <img src="/assets/img/sliders/medium/{{$slider->image}}" class="img-responsive"/>
+                            <img src="/assets/img/sliders/{{$slider->image}}" class="img-responsive"/>
 
                             <button type="submit" class="btn btn-danger">Delete</button>
 
@@ -101,6 +102,6 @@
                     @endforeach
                 </div>
             </div>
-    @endforeach
+        @endforeach
     </div>
 @endsection

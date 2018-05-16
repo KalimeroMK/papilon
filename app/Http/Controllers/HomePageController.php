@@ -162,5 +162,5 @@ class HomePageController extends Controller
         return view('main.search')->with($data);
     }
 
-
+    
 }

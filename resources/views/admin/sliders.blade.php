@@ -7,7 +7,6 @@
                 <p><a class="btn btn-labeled shiny btn-warning btn-large" href="/admin/slider/create"> <i
                                 class="btn-label fa fa-plus"></i>Додади слика во слајдер </a></p>
             </div>
-
             <div class="col-lg-12">
                 <div class="widget">
                     <div class="widget-header bordered-bottom bordered-themesecondary">

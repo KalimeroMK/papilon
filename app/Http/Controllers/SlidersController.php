@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Sliders as Slider;
 use App\User as User;
-use App\Country as Country;
-use App\Category as Category;
 use App\Product as Product;
 use App\Workflow as Workflow;
 use Validator;
@@ -100,7 +97,6 @@ class SlidersController extends Controller
     public function destroy(Request $request)
     {
         $slider = Slider::FindOrFail($request['id']);
-
         // Delete blog images
         $image = public_path() . '/assets/img/sliders/' . $slider->image;
         $imagemedium = public_path() . '/assets/img/sliders/medium/' . $slider->image;
@@ -114,3 +110,4 @@ class SlidersController extends Controller
         return redirect()->back();
     }
 }
+

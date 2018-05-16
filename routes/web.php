@@ -1,7 +1,5 @@
 <?php
 
-use App\Product as Product;
-
 Route::group(['prefix' => 'admin'], function () {
 
 });
@@ -28,6 +26,13 @@ Route::group(['middleware' => ['web', 'role:admin'], 'prefix' => 'admin'], funct
     Route::post('/settings/store', 'HomeController@store')->name('admin.settings.store');
     Route::get('/settings/{id}/edit', 'HomeController@edit')->name('admin.settings.edit');
     Route::post('/settings/update', 'HomeController@update')->name('admin.settings.update');
+
+    Route::resource('/sliders/{id}/product', 'SlidersController', ['names' => [
+        'index' => 'admin.sliders.index',
+        'store' => 'admin.sliders.store',
+        'destroy' => 'admin.sliders.destroy',
+
+    ]]);
 
     Route::resource('/sliders', 'SlidersController', ['names' => [
         'index' => 'admin.sliders.index',
@@ -97,4 +102,5 @@ Route::get('/services/{slug}', 'HomePageController@services');
 Route::get('/product/{slug}', 'HomePageController@product');
 Route::get('/categories/{slug}', 'HomePageController@categories');
 Route::post('/search', 'HomePageController@search');
+
 
