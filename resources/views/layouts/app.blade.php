@@ -190,27 +190,27 @@
 
                     </a>
                 </li>
-                <li>
-                    <a href="/admin/staticpage" class="menu">
-                        <i class="menu-icon fa fa-file"></i>
-                        <span class="menu-text"> Страни </span>
+                {{--<li>--}}
+                    {{--<a href="/admin/staticpage" class="menu">--}}
+                        {{--<i class="menu-icon fa fa-file"></i>--}}
+                        {{--<span class="menu-text"> Страни </span>--}}
 
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin/services" class="menu">
-                        <i class="menu-icon fa fa-bell-o"></i>
-                        <span class="menu-text"> Услуги </span>
+                    {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                    {{--<a href="/admin/services" class="menu">--}}
+                        {{--<i class="menu-icon fa fa-bell-o"></i>--}}
+                        {{--<span class="menu-text"> Услуги </span>--}}
 
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin/referrals" class="menu">
-                        <i class="menu-icon fa fa-sort-amount-desc"></i>
-                        <span class="menu-text"> Референти </span>
+                    {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                    {{--<a href="/admin/referrals" class="menu">--}}
+                        {{--<i class="menu-icon fa fa-sort-amount-desc"></i>--}}
+                        {{--<span class="menu-text"> Референти </span>--}}
 
-                    </a>
-                </li>
+                    {{--</a>--}}
+                {{--</li>--}}
                 <li>
                     <a href="/admin/users" class="menu">
                         <i class="menu-icon fa fa-users"></i>

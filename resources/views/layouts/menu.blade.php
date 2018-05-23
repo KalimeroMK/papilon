@@ -7,7 +7,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="/categories/leto-2018-0"
                        id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -15,53 +15,53 @@
                         Лето 2018
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="/categories/turtsija-0">Турција</a></li>
+                        <li><a class="dropdown-item" href="/categories/turtsija">Турција</a></li>
 
-                        <li><a class="dropdown-item dropdown-toggle" href="/categories/bugarija-0">Бугарија</a>
+                        <li><a class="dropdown-item dropdown-toggle" href="/categories/bugarija">Бугарија</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/categories/sonchev-breg-0">Сончев Брег</a></li>
-                                <li><a class="dropdown-item" href="/categories/sveti-konstantin-0">Свети Константин</a>
+                                <li><a class="dropdown-item" href="/categories/sonchev-breg">Сончев Брег</a></li>
+                                <li><a class="dropdown-item" href="/categories/sveti-konstantin">Свети Константин</a>
                                 </li>
-                                <li><a class="dropdown-item" href="/categories/sveti-vlas-0">Свети Влас</a></li>
-                                <li><a class="dropdown-item" href="/categories/ravda-0">Равда</a></li>
-                                <li><a class="dropdown-item" href="/categories/nesebar-0">Несебар</a></li>
-                                <li><a class="dropdown-item" href="/categories/zlatni-pesoci-0">Златни Песоци</a></li>
-                                <li><a class="dropdown-item" href="/categories/albena-0">Албена</a></li>
+                                <li><a class="dropdown-item" href="/categories/sveti-vlas">Свети Влас</a></li>
+                                <li><a class="dropdown-item" href="/categories/ravda">Равда</a></li>
+                                <li><a class="dropdown-item" href="/categories/nesebar">Несебар</a></li>
+                                <li><a class="dropdown-item" href="/categories/zlatni-pesotsi">Златни Песоци</a></li>
+                                <li><a class="dropdown-item" href="/categories/albena">Албена</a></li>
                                 <li><a class="dropdown-item" href="/categories/chaika-0">Чаика</a></li>
 
                             </ul>
                         </li>
-                        <li><a class="dropdown-item" href="/categories/kipar-0">Кипар</a></li>
+                        <li><a class="dropdown-item" href="/categories/kipar">Кипар</a></li>
 
-                        <li><a class="dropdown-item dropdown-toggle" href="/categories/grtsija-0">Грција</a>
+                        <li><a class="dropdown-item dropdown-toggle" href="/categories/grtsija">Грција</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="/categories/khoteli-onlajn-buking-0">Хотел онлајн
                                         букинг</a></li>
                                 <li><a class="dropdown-item dropdown-toggle"
-                                       href="/categories/khalkidiki-0">Халкидики</a>
+                                       href="/categories/khalkidiki">Халкидики</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/categories/atos-0">Атос</a></li>
-                                        <li><a class="dropdown-item" href="/categories/kasandra-0">Касандра</a></li>
-                                        <li><a class="dropdown-item" href="/categories/sani-0">Сани</a></li>
-                                        <li><a class="dropdown-item" href="/categories/sitonija-0">Ситонија</a></li>
+                                        <li><a class="dropdown-item" href="/categories/atos">Атос</a></li>
+                                        <li><a class="dropdown-item" href="/categories/kasandra">Касандра</a></li>
+                                        <li><a class="dropdown-item" href="/categories/sani">Сани</a></li>
+                                        <li><a class="dropdown-item" href="/categories/sitonija">Ситонија</a></li>
                                     </ul>
                                 </li>
                                 <li><a class="dropdown-item dropdown-toggle" href="/categories/ostrovi-0">Острови</a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="/categories/krit">Крит</a></li>
-                                        <li><a class="dropdown-item" href="/categories/rodos-0">Родос</a></li>
-                                        <li><a class="dropdown-item" href="/categories/santorini-0">Санторини</a></li>
-                                        <li><a class="dropdown-item" href="/categories/evia-0">Евиа</a></li>
-                                        <li><a class="dropdown-item" href="/categories/krf-0">Крф</a></li>
-                                        <li><a class="dropdown-item" href="/categories/tasos-0">Тасос</a></li>
+                                        <li><a class="dropdown-item" href="/categories/rodos">Родос</a></li>
+                                        <li><a class="dropdown-item" href="/categories/santorini">Санторини</a></li>
+                                        <li><a class="dropdown-item" href="/categories/evia">Евиа</a></li>
+                                        <li><a class="dropdown-item" href="/categories/krf">Крф</a></li>
+                                        <li><a class="dropdown-item" href="/categories/tasos">Тасос</a></li>
                                     </ul>
                                 </li>
-                                <li><a class="dropdown-item" href="/categories/kalifada-0">Глифада</a></li>
+                                <li><a class="dropdown-item" href="/categories/glifada">Глифада</a></li>
 
-                                <li><a class="dropdown-item" href="/categories/pieria-0">Пиериа</a></li>
-                                <li><a class="dropdown-item" href="/categories/peloponez-0">Пелопонез</a></li>
-                                <li><a class="dropdown-item" href="/categories/parga-0">Парга</a></li>
-                                <li><a class="dropdown-item" href="/categories/kavala-0">Кавала</a></li>
+                                <li><a class="dropdown-item" href="/categories/pieria">Пиериа</a></li>
+                                <li><a class="dropdown-item" href="/categories/peloponez">Пелопонез</a></li>
+                                <li><a class="dropdown-item" href="/categories/parga">Парга</a></li>
+                                <li><a class="dropdown-item" href="/categories/kavala">Кавала</a></li>
 
 
                                 <li><a class="dropdown-item dropdown-toggle" href="/categories/privatno-smestuvanje-0">Приватно
@@ -69,10 +69,10 @@
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="/categories/jonsko-krajbrezhje-0">Јонско
                                                 крајбрежје</a></li>
-                                        <li><a class="dropdown-item" href="/categories/kasandra-0">Касандра</a></li>
+                                        <li><a class="dropdown-item" href="/categories/kasandra">Касандра</a></li>
                                         <li><a class="dropdown-item" href="/categories/ostrovi-0">Острови</a></li>
-                                        <li><a class="dropdown-item" href="/categories/pieria-0">Пиериа</a></li>
-                                        <li><a class="dropdown-item" href="/categories/sitonija-0">Ситонија</a></li>
+                                        <li><a class="dropdown-item" href="/categories/pieria">Пиериа</a></li>
+                                        <li><a class="dropdown-item" href="/categories/sitonija">Ситонија</a></li>
                                         <li><a class="dropdown-item" href="/categories/spetsijalni-ponudi-0">Специјални
                                                 понуди</a></li>
 
@@ -104,9 +104,9 @@
                         <li><a class="dropdown-item" href="/categories/avtobuski-aranzhmani-0">Автобуски аранжмани</a>
                         </li>
 
-                        <li><a class="dropdown-item" href="/categories/kipar-0">Кипар</a></li>
+                        <li><a class="dropdown-item" href="/categories/kipar">Кипар</a></li>
 
-                        <li><a class="dropdown-item" href="/categories/grtsija-0">Грција</a></li>
+                        <li><a class="dropdown-item" href="/categories/grtsija">Грција</a></li>
 
                     </ul>
                 </li>
@@ -118,22 +118,22 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="/categories/grupni-patuvanja-0">Групни патувања</a></li>
-                        <li><a class="dropdown-item" href="/categories/egipet-0">Египет</a></li>
+                        <li><a class="dropdown-item" href="/categories/egipet">Египет</a></li>
 
-                        <li><a class="dropdown-item" href="/categories/maldivi-0">Малдиви</a></li>
+                        <li><a class="dropdown-item" href="/categories/maldivi">Малдиви</a></li>
 
-                        <li><a class="dropdown-item" href="/categories/dubai-0">Дубаи</a></li>
-                        <li><a class="dropdown-item" href="/categories/tajland-0">Тајланд</a></li>
-                        <li><a class="dropdown-item" href="/categories/kuba-0">Куба</a></li>
+                        <li><a class="dropdown-item" href="/categories/dubai">Дубаи</a></li>
+                        <li><a class="dropdown-item" href="/categories/tajland">Тајланд</a></li>
+                        <li><a class="dropdown-item" href="/categories/kuba">Куба</a></li>
 
-                        <li><a class="dropdown-item" href="/categories/bali-0">Бали</a></li>
+                        <li><a class="dropdown-item" href="/categories/bali">Бали</a></li>
 
-                        <li><a class="dropdown-item" href="/categories/dominikanska-republika-">Доминиканска
+                        <li><a class="dropdown-item" href="/categories/dominikanska-republika">Доминиканска
                                 република</a></li>
-                        <li><a class="dropdown-item" href="/categories/zanzibar-">Занзибар</a></li>
-                        <li><a class="dropdown-item" href="/categories/mauritsius-0">Маурициус</a></li>
+                        <li><a class="dropdown-item" href="/categories/zanzibar">Занзибар</a></li>
+                        <li><a class="dropdown-item" href="/categories/mauritsius">Маурициус</a></li>
 
-                        <li><a class="dropdown-item" href="/categories/sejsheli-0">Сејшели</a></li>
+                        <li><a class="dropdown-item" href="/categories/sejsheli">Сејшели</a></li>
 
                         <li><a class="dropdown-item" href="/categories/krstarenja-0">Крстарење</a></li>
 
@@ -175,9 +175,7 @@
             </ul>
         </div>
     </nav>
-    </div>
-    </div>
-    </nav>
+
     <!-- header-top end -->
 
 
