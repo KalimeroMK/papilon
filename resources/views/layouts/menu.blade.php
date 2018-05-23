@@ -92,7 +92,7 @@
                         <li><a class="dropdown-item" href="/categories/khit-ponuda-0">Хит понуда</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
+              {{--   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="/categories/veligdenski-patuvanja-0"
                        id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
@@ -109,7 +109,7 @@
                         <li><a class="dropdown-item" href="/categories/grtsija">Грција</a></li>
 
                     </ul>
-                </li>
+                </li> --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="/categories/dalechni-destinatsii-0"
                        id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"

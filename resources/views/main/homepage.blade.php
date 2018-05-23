@@ -45,7 +45,7 @@
 @endsection
 @section('content')
 <section><!-- src box start -->
- <div id="small-search" class="container">
+{{--  <div id="small-search" class="container">
      <div class="col-md-12">
 
       <form action="{{ url('/search') }}" method="post">
@@ -63,32 +63,51 @@
 </form>
 
 </div>
-</div>
+</div> --}}
 
 <!-- FFILTER -->
 
 <div class=" py-5" id="frontpage-search-filter">
-   <div class="container">
-     <div class="col-md-12">
-       <h2 class="text-white">Хотелски аранжмани</h2>
-   </div>
+ <div class="container">
    <div class="col-md-12">
-       <form class="row">
-         <div class="form-group mb-0  px-3 col-md-5">
-           <label for="destination">Дестинација, Хотел</label>
-           <select class="form-control" id="destination">
-             <option disabled selected>Дестинација, Хотел</option>
-             <option>2</option>
-         </select>
-     </div>
-     <div class="form-group mb-0  px-3 col-md-3">
-        <label for="date" >Датум</label>
-        <input type="date" name="date" id="date" max="3000-12-31"
-        min="1000-01-01" class="form-control">
+     <h2 class="text-white">Хотелски аранжмани</h2>
+ </div>
+ <div class="col-md-12">
+     <form action="{{ url('/search') }}" method="post" class="row">
+       <div class="form-group mb-0  px-3 col-md-3">
+         <label for="destination">Дестинација, Хотел</label>
+         <select class="form-control" id="destination">
+            <option value="volvo">Сместувачки капацитети</option>
+            <option value="volvo">Хотели</option>
+            <option value="saab">Приватно сместување</option>
+        </select>
+
     </div>
-    <div class="col-md-3 d-flex align-items-center">
-       <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>Пребарај</button>
-   </div>
+    <div class="form-group mb-0  px-3 col-md-3">
+     <label for="destination">Дестинација, Хотел</label>
+     <select class="form-control" id="destination">
+        <option value="Агенциски">Држава</option>
+        <option value="Агенциски">Грција</option>
+        <option value="Приватен">Бугарија</option>
+
+    </select>
+
+</div>
+<div class="form-group mb-0  px-3 col-md-3">
+ <label for="destination">Дестинација, Хотел</label>
+ <select class="form-control" id="destination">
+
+    <option value="Лето">Сезона</option>
+    <option value="Лето">Лето</option>
+    <option value="Лето">Есен</option>
+
+
+</select>
+
+</div>
+<div class="col-md-3 d-flex align-items-center">
+ <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>Пребарај</button>
+</div>
 </form>
 </div>
 </div>
@@ -125,7 +144,7 @@
                         <div class="single-offer fancy-offer">
                             <img src="/frontend/images/offer1.jpg" class="img-fluid" alt="offer"/>
                             <h2>Далечни патувања</h2>
-                            <a href="categories/dalechni-destinatsii" class="btn btn-primary">Погледни повеќе</a>
+                            <a href="categories/dalechni-destinatsii-0" class="btn btn-primary">Погледни повеќе</a>
                         </div>
                     </div>
                     <div class="col-md-3 ">
